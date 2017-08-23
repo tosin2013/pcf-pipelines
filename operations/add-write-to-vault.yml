@@ -1,4 +1,4 @@
-- op: replace
+- op: add
   path: /resource_types/-
   value:
     name: curl
@@ -7,7 +7,7 @@
       repository: pivotalservices/concourse-curl-resource
       tag: latest
 
-- op: replace
+- op: add
   path: /resources/-
   value:
     name: vault
@@ -16,7 +16,7 @@
       url: https://releases.hashicorp.com/vault/0.8.1/vault_0.8.1_linux_amd64.zip
       filename: vault.zip
 
-- op: replace
+- op: add
   path: /jobs/name=write-secrets-to-vault
   value:
     plan:
