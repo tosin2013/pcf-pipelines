@@ -39,6 +39,6 @@
         VAULT_ADDR: {{vault_addr}}
         VAULT_TOKEN: {{vault_token}}
         FOUNDATION_NAME: {{foundation_name}}
-        OPSMAN_DOMAIN_OR_IP_ADDRESS: {{opsman_domain_or_ip_address}}
+        OPSMAN_DOMAIN_OR_IP_ADDRESS: {{opsman_uri}}
         OPSMAN_USERNAME: {{opsman_admin_username}}
         OPSMAN_PASSWORD: {{opsman_admin_password}}
