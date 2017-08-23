@@ -17,8 +17,9 @@
       filename: vault.zip
 
 - op: add
-  path: /jobs/name=write-secrets-to-vault
+  path: /jobs/-
   value:
+    name: write-secrets-to-vault
     plan:
     - aggregate:
       - get: pcf-pipelines
