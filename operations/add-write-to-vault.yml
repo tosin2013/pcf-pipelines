@@ -28,10 +28,6 @@
         params: {globs: []}
         passed: [deploy-ert]
         trigger: true
-      - get: pivnet-product
-        resource: elastic-runtime
-        params: {globs: ["*.pivotal"]}
-        passed: [deploy-ert]
 
     - task: write-secrets-to-vault
       file: pcf-pipelines/tasks/write-secrets-to-vault/task.yml
