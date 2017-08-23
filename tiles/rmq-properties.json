@@ -1,0 +1,40 @@
+{
+    ".rabbitmq-server.plugins": {
+      "value": [
+        "rabbitmq_management"
+      ]
+    },
+    ".rabbitmq-server.server_admin_credentials": {
+      "value": {
+        "identity": "$RABBITMQ_ADMIN",
+        "password": "$RABBITMQ_PW"
+      }
+    },
+    ".rabbitmq-server.ssl_cacert": {
+      "value": null
+    },
+    ".rabbitmq-server.ssl_verify": {
+      "value": $SSL_VERIFY 
+    },
+    ".rabbitmq-server.ssl_verification_depth": {
+      "value": $SSL_VERIFY_DEPTH
+    },
+    ".rabbitmq-server.ssl_fail_if_no_peer_cert": {
+      "value": $SSL_FAIL_IF_NO_PEER_CERT
+    },
+    ".rabbitmq-server.cookie": {
+      "value": null
+    },
+    ".rabbitmq-server.config": {
+      "value": null
+    },
+    ".properties.metrics_tls_disabled": {
+      "value": false
+    },
+    ".properties.syslog_address": {
+      "value": "$SYSLOG_HOST"
+    },
+    ".properties.syslog_port": {
+      "value": $SYSLOG_PORT
+    }
+}
