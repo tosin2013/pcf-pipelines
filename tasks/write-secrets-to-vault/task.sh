@@ -25,7 +25,7 @@ bosh_cacert=$(cat bosh-manifest.json  | jq -r ".jobs[0].properties.director.conf
 bosh_client_secret=$(cat bosh-manifest.json  | jq -r ".jobs[0].properties.uaa.clients.bbr_client.secret")
 
 vault write secret/bosh-$FOUNDATION_NAME-props \
-  bosh-cacert=$bosh_cacert \
+  bosh-cacert="$bosh_cacert" \
   bosh-client-id=bbr_client \
   bosh-client-secret=$bosh_client_secret \
   bosh-url="https://$bosh_ip" 
