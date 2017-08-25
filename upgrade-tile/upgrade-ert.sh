@@ -1,3 +1,5 @@
 #!/bin/bash 
 
-fly -t sdx-team sp -p upgrade-sdx-ert -c <(yaml-patch -o ../operations/use-different-git-repo.yml <pipeline.yml ) -l upgrade-ert-vars-sd.yml 
+yaml-patch -o ../operations/use-different-git-repo.yml <pipeline.yml > tmp-pipeline.yml
+
+fly-sb -t sandbox sp -p upgrade-sdx-ert -c tmp-pipeline.yml -l upgrade-ert-vars-sd.yml

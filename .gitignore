@@ -4,3 +4,4 @@ config
 .idea
 *.sw[po]
 *vars*.yml
+tmp-pipeline.yml
