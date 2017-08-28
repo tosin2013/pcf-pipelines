@@ -43,7 +43,7 @@ jobs:
   plan:
   - aggregate:
     - get: pcf-pipelines
-    - get: tile
+    - get: pivnet-product
       resource: tile
       trigger: true
       params:
@@ -93,6 +93,7 @@ jobs:
       DEPLOYMENT_NW_AZS: {{deployment_nw_azs}}
       NETWORK_NAME: {{network_name}}
       SINGLETON_JOB_AZ: {{singleton_job_az}}
+      SERVICE_NETWORK_NAME: {{service_network_name}}
 
 - name: product-apply-changes
   plan:

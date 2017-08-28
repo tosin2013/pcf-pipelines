@@ -66,3 +66,4 @@ poll_interval: 1h
 singleton_job_az: 
 deployment_nw_azs: 
 network_name: 
+service_network_name:
