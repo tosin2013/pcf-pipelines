@@ -14,7 +14,8 @@ params:
   SINGLETON_JOB_AZ:
   DEPLOYMENT_NW_AZS:
   NETWORK_NAME:
-  CLIENT_SECRET:
+  SERVICE_NETWORK_NAME:
+
 
 inputs:
   - name: pcf-pipelines

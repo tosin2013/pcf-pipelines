@@ -2,32 +2,20 @@
 
 set -eu
 
+json_network_doc=". + $(cat pcf-pipelines/tiles/redis-network.json)"
+json_properties_doc=". + $(cat pcf-pipelines/tiles/redis-network.json)"
+json_resource_doc=". + $(cat pcf-pipelines/tiles/redis-network.json)"
+
 tile_network=$(
   echo '{}' |
   jq \
     --arg network_name "$NETWORK_NAME" \
     --arg other_azs "$DEPLOYMENT_NW_AZS" \
     --arg singleton_az "$SINGLETON_JOB_AZ" \
-    '
-    . +
-    {
-      "network": {
-        "name": $network_name
-      },
-      "other_availability_zones": ($other_azs | split(",") | map({name: .})),
-      "singleton_availability_zone": {
-        "name": $singleton_az
-      }
-    }
-    '
+    --arg service_network_name "$SERVICE_NETWORK_NAME" \
+    "$json_network_doc"
 )
 
-
-if [ "${CLIENT_SECRET}" == "true" ]; then
-  AUTH_PAIR="--client-id ${OPS_MGR_USR} --client-secret ${OPS_MGR_PWD}"
-else
-  AUTH_PAIR="--username ${OPS_MGR_USR} --password ${OPS_MGR_PWD}"
-fi
 
 om-linux \
   --target https://$OPS_MGR_HOST \
@@ -35,4 +23,6 @@ om-linux \
   --skip-ssl-validation \
   configure-product \
   --product-name $PRODUCT_NAME \
-  --product-network "$tile_network" 
+  --product-network "$tile_network" #\
+#  --product-properties "$tile_properties" \
+#  --product-resources "$tile_resources"
