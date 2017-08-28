@@ -1,3 +1,3 @@
-foundation_name:
-vault_url:
-vault_token:
+rabbitmq_admin:
+rabbitmq_password:
+

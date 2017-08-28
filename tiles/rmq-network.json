@@ -1,11 +1,11 @@
 {
   "singleton_availability_zone": {
-    "name": "$SINGLETON_JOB_AZ"
+    "name": "$FIRST_SERVICE_AZ"
   },
   "other_availability_zones": [
-    $OTHER_AZS
+    $SERVICES_NW_AZS
   ],
   "network": {
-    "name": "$NETWORK_NAME"
+    "name": "$SERVICES_NETWORK_NAME"
   }
 }

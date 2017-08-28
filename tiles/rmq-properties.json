@@ -1,40 +1,69 @@
 {
-    ".rabbitmq-server.plugins": {
-      "value": [
-        "rabbitmq_management"
-      ]
+    ".properties.metrics_polling_interval": {
+      "value": 30,
+    },
+    ".properties.syslog_selector": {
+      "value": "disabled",
+    },
+    ".properties.syslog_selector.enabled.address": {
+      "value": null,
+    },
+    ".properties.syslog_selector.enabled.port": {
+      "value": null,
     },
     ".rabbitmq-server.server_admin_credentials": {
       "value": {
         "identity": "$RABBITMQ_ADMIN",
-        "password": "$RABBITMQ_PW"
-      }
+        "password": "$RABBITMQ_PASSWORD"
+      },
     },
-    ".rabbitmq-server.ssl_cacert": {
-      "value": null
+    ".rabbitmq-server.plugins": {
+      "value": [
+        "rabbitmq_management"
+      ],
     },
     ".rabbitmq-server.ssl_verify": {
-      "value": $SSL_VERIFY 
+      "value": false,
     },
     ".rabbitmq-server.ssl_verification_depth": {
-      "value": $SSL_VERIFY_DEPTH
+      "value": 5,
     },
     ".rabbitmq-server.ssl_fail_if_no_peer_cert": {
-      "value": $SSL_FAIL_IF_NO_PEER_CERT
+      "value": false,
     },
-    ".rabbitmq-server.cookie": {
-      "value": null
+    ".rabbitmq-server.ports": {
+      "value": "15672, 5672, 5671, 1883, 8883, 61613, 61614, 15674",
     },
-    ".rabbitmq-server.config": {
-      "value": null
+    ".on-demand-broker.enable_single_node_plan": {
+      "value": false,
     },
-    ".properties.metrics_tls_disabled": {
-      "value": false
+    ".on-demand-broker.plan_name": {
+      "value": "solo",
     },
-    ".properties.syslog_address": {
-      "value": "$SYSLOG_HOST"
+    ".on-demand-broker.plan_description": {
+      "value": "Single node RabbitMQ dedicated instance",
     },
-    ".properties.syslog_port": {
-      "value": $SYSLOG_PORT
+    ".on-demand-broker.plan_features": {
+      "value": "RabbitMQ 3.6.9",
+    },
+    ".on-demand-broker.solo_plan_instance_quota": {
+      "value": 0,
+    },
+    ".on-demand-broker.global_service_instance_quota": {
+      "value": 20,
+    },
+    ".on-demand-broker.persistent_disk_type": {
+      "value": "51200",
+      "optional": false
+    },
+    ".on-demand-broker.az_placement": {
+      "value": [
+	$SERVICES_NW_AZS
+      ],
+      "optional": false
+    },
+    ".on-demand-broker.rmq_vm_type": {
+      "value": "large.mem",
     }
 }
+

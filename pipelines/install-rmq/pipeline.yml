@@ -1,10 +1,3 @@
-resources:
-  name: vault
-  type: curl
-  source:
-    url: https://releases.hashicorp.com/vault/0.8.1/vault_0.8.1_linux_amd64.zip
-    filename: vault.zip
-
 jobs:
 - name: deploy 
   plan:
@@ -18,13 +11,17 @@ jobs:
   - task: upload-tile
     file: pcf-pipelines/tasks/upload-tile/task.yml
     params:
-      VAULT_ADDR: {{vault_addr}}
-      VAULT_TOKEN: {{vault_token}}
-      FOUNDATION_NAME: {{foundation_name}}
+      OPSMAN_URL: ((opsman_uri))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
 
   - task: deploy 
     file: pcf-pipelines/tasks/install-tile/task.yml
     params:
-      VAULT_ADDR: {{vault_addr}}
-      VAULT_TOKEN: {{vault_token}}
-      FOUNDATION_NAME: {{foundation_name}}
+      OPSMAN_URL: ((opsman_uri))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SERVICES_NETWORK_NAME: ((services_network_name))
+      SERVICES_NW_AZS: ((services_nw_azs))
+      RABBITMQ_ADMIN: ((rabbitmq_admin))
+      RABBITMQ_PASSWORD: ((rabbitmq_password))
