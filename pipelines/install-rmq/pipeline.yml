@@ -13,7 +13,7 @@ resources:
     branch: ((git_branch))
     skip_ssl_verification: true
 
-- name: p-rabbitmq 
+- name: pivnet-product 
   type: pivnet
   check_every: 4h
   source:
@@ -27,7 +27,7 @@ jobs:
   plan:
   - aggregate:
     - get: pcf-pipelines
-    - get: p-rabbitmq
+    - get: pivnet-product
       params: {globs: ["*.pivotal"]}
 
   - task: upload-tile
