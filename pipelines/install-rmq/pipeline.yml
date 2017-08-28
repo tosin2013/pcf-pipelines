@@ -1,11 +1,27 @@
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: git@github.com:cxhercules/pcf-pipelines.git
+    branch: master
+    private_key: ((git_private_key))
+
+- name: pivnet-product
+  type: pivnet
+  check_every: 4h
+  source:
+    api_token: ((pivnet_token))
+    product_slug: p-rabbitmq 
+    product_version: ((p_rabbitmq_version))
+    sort_by: semver
+
 jobs:
 - name: deploy 
   plan:
   - aggregate:
     - get: pcf-pipelines
-    - get: vault
     - get: pivnet-product
-      resource: elastic-runtime
+      resource: p-rabbitmq 
       params: {globs: ["*.pivotal"]}
 
   - task: upload-tile
