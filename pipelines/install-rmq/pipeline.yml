@@ -40,7 +40,7 @@ jobs:
   - task: deploy 
     file: pcf-pipelines/tasks/install-tile/task.yml
     params:
-      PRODUCT_NAME: rmq
+      PRODUCT_NAME: p-rabbitmq
       OPSMAN_URL: ((opsman_uri))
       OPSMAN_USER: ((opsman_admin_username))
       OPSMAN_PASSWORD: ((opsman_admin_password))
