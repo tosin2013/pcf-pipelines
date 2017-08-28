@@ -2,9 +2,7 @@
   "singleton_availability_zone": {
     "name": $singleton_az
   },
-  "other_availability_zones": [
-    $other_azs
-  ],
+  "other_availability_zones": ($other_azs | split(",") | map({name: .})),
   "network": {
     "name": $network_name
   },
