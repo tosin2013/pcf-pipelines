@@ -9,8 +9,9 @@ resources:
 - name: pcf-pipelines
   type: git
   source:
-    uri: git@github.com:cxhercules/pcf-pipelines.git
-    branch: master
+    uri: {{git_repo}} 
+    branch: {{git_branch}}
+    skip_ssl_verification: true
 
 - name: p-rabbitmq 
   type: pivnet
