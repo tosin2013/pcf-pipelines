@@ -27,7 +27,6 @@ jobs:
   - aggregate:
     - get: pcf-pipelines
     - get: pivnet-product
-      resource: tile
       trigger: true
       params:
         globs:
