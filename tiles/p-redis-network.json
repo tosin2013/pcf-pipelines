@@ -1,12 +1,12 @@
 {
   "singleton_availability_zone": {
-    "name": $singleton_az
+    "name": $FIRST_SERVICE_AZ
   },
-  "other_availability_zones": ($other_azs | split(",") | map({name: .})),
+  "other_availability_zones": $JSON_SERVICE_AZS,
   "network": {
-    "name": $network_name
+    "name": "$SERVICES_NETWORK_NAME"
   },
   "service_network": {
-    "name": $service_network_name
+    "name": "$DYNAMIC_SERVICES_NETWORK_NAME"
   }
 }

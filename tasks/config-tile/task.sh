@@ -1,29 +1,15 @@
-#!/bin/bash
+#!/bin/bash -e
 
-set -eu
+export JSON_SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R '(split(",") | map({name: .}))')
+export ARRAY_SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R 'split(",")')
+export FIRST_SERVICE_AZ=$(echo $SERVICES_NW_AZS | jq -R 'split(",") | .[0]')
 
-json_network_doc=". + $(cat pcf-pipelines/tiles/${PRODUCT_NAME}-network.json)"
-json_properties_doc="$(cat pcf-pipelines/tiles/${PRODUCT_NAME}-properties.json)"
-json_resource_doc="{}"
+NETWORK=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-network.json)
+PROPERTIES=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-properties.json)
+RESOURCES=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-resources.json)
 
-tile_network=$(
-  echo '{}' |
-  jq \
-    --arg network_name "$NETWORK_NAME" \
-    --arg other_azs "$DEPLOYMENT_NW_AZS" \
-    --arg singleton_az "$SINGLETON_JOB_AZ" \
-    --arg service_network_name "$SERVICE_NETWORK_NAME" \
-    "$json_network_doc"
-)
+echo $NETWORK | jq
+echo $PROPERTIES | jq
+echo $RESOURCES | jq
 
-
-om-linux \
-  --target https://$OPS_MGR_HOST \
-  --username $OPS_MGR_USR \
-  --password $OPS_MGR_PWD \
-  --skip-ssl-validation \
-  configure-product \
-  --product-name $PRODUCT_NAME \
-  --product-network "$tile_network" \
-  --product-properties "$json_properties_doc" \
-  --product-resources "$json_resource_doc"
+om-linux -t $OPSMAN_URL -u $OPSMAN_USER -p $OPSMAN_PASSWORD -k configure-product -n $PRODUCT_NAME -p "$PROPERTIES" -pn "$NETWORK" -pr "$RESOURCES"
