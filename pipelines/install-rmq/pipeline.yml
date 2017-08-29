@@ -44,6 +44,7 @@ jobs:
       OPSMAN_USER: ((opsman_admin_username))
       OPSMAN_PASSWORD: ((opsman_admin_password))
       SERVICES_NETWORK_NAME: ((services_network_name))
+      DYNAMIC_SERVICES_NETWORK_NAME: ((dynamic_services_network_name))
       SERVICES_NW_AZS: ((services_nw_azs))
       RABBITMQ_ADMIN: ((rabbitmq_admin))
       RABBITMQ_PASSWORD: ((rabbitmq_password))

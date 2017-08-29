@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
-export SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R '(split(",") | map({name: .}))')
+export JSON_SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R '(split(",") | map({name: .}))')
+export ARRAY_SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R '(split(",")')
 export FIRST_SERVICE_AZ=$(echo $SERVICES_NW_AZS | jq -R 'split(",") | .[0]')
 
 NETWORK=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-network.json)
