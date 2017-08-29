@@ -11,6 +11,7 @@ fi
 
 
 yaml-patch -o ../../operations/use-different-git-repo.yml <pipeline.yml >tmp-pipeline.yml
+sed -i -e "s/{{/((/g" -e "s/}}/))/g" tmp-pipeline.yml
 
 $FLYCMD -t $CONCOURSE_TARGET set-pipeline -p install-redis -c tmp-pipeline.yml \
    -l vars.yml $nonint
