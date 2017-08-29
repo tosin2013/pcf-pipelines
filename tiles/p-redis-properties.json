@@ -1,341 +1,119 @@
 {
     ".properties.syslog_selector": {
-      "type": "selector",
-      "configurable": true,
-      "credential": false,
-      "value": "No",
-      "optional": false
+      "value": "No"
     },
     ".properties.syslog_selector.active.syslog_transport": {
-      "type": "dropdown_select",
-      "configurable": true,
-      "credential": false,
-      "value": "tcp",
-      "optional": false,
-      "options": [
-        {
-          "label": "TCP",
-          "value": "tcp"
-        },
-        {
-          "label": "UDP",
-          "value": "udp"
-        },
-        {
-          "label": "RELP",
-          "value": "relp"
-        }
-      ]
+      "value": "tcp"
     },
     ".properties.syslog_selector.active.syslog_format": {
-      "type": "dropdown_select",
-      "configurable": true,
-      "credential": false,
-      "value": "rfc5424",
-      "optional": false,
-      "options": [
-        {
-          "label": "RFC 5424",
-          "value": "rfc5424"
-        },
-        {
-          "label": "Legacy Format",
-          "value": "job_index_id"
-        }
-      ]
+      "value": "rfc5424"
     },
     ".properties.metrics_polling_interval": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 30,
-      "optional": false
+      "value": 30
     },
     ".properties.small_plan_selector": {
-      "type": "selector",
-      "configurable": true,
-      "credential": false,
-      "value": "Plan Active",
-      "optional": false
+      "value": "Plan Active"
     },
     ".properties.small_plan_selector.active.name": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "cache-small",
-      "optional": false
+      "value": "cache-small"
     },
     ".properties.small_plan_selector.active.description": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "This plan provides a small dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled",
-      "optional": false
+      "value": "This plan provides a small dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled"
     },
     ".properties.small_plan_selector.active.cf_service_access": {
-      "type": "dropdown_select",
-      "configurable": true,
-      "credential": false,
-      "value": "enable",
-      "optional": false,
-      "options": [
-        {
-          "label": "Enabled for all orgs and spaces",
-          "value": "enable"
-        },
-        {
-          "label": "Disabled for all orgs and spaces",
-          "value": "disable"
-        },
-        {
-          "label": "Leave access unchanged",
-          "value": "manual"
-        }
-      ]
+      "value": "enable"
     },
     ".properties.small_plan_selector.active.az_single_select": {
-      "type": "service_network_az_single_select",
-      "configurable": true,
-      "credential": false,
-      "value": "AZ1",
-      "optional": false
+      "value": "AZ1"
     },
     ".properties.small_plan_selector.active.vm_type": {
-      "type": "vm_type_dropdown",
-      "configurable": true,
-      "credential": false,
-      "value": "medium",
-      "optional": false
+      "value": "medium"
     },
     ".properties.small_plan_selector.active.disk_size": {
-      "type": "disk_type_dropdown",
-      "configurable": true,
-      "credential": false,
-      "value": "10240",
-      "optional": false
+      "value": "10240"
     },
     ".properties.small_plan_selector.active.timeout": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 3600,
-      "optional": false
+      "value": 3600
     },
     ".properties.small_plan_selector.active.tcp_keepalive": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 60,
-      "optional": false
+      "value": 60
     },
     ".properties.small_plan_selector.active.maxclients": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 1000,
-      "optional": false
+      "value": 1000
     },
     ".properties.small_plan_selector.active.lua_scripting": {
-      "type": "boolean",
-      "configurable": true,
-      "credential": false,
-      "value": true,
-      "optional": false
+      "value": true
     },
     ".properties.small_plan_selector.active.instance_limit": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 20,
-      "optional": false
+      "value": 20
     },
     ".properties.medium_plan_selector": {
-      "type": "selector",
-      "configurable": true,
-      "credential": false,
-      "value": "Plan Inactive",
-      "optional": false
+      "value": "Plan Inactive"
     },
     ".properties.medium_plan_selector.active.name": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "cache-medium",
-      "optional": false
+      "value": "cache-medium"
     },
     ".properties.medium_plan_selector.active.description": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "This plan provides a medium dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled",
-      "optional": false
+      "value": "This plan provides a medium dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled"
     },
     ".properties.medium_plan_selector.active.cf_service_access": {
-      "type": "dropdown_select",
-      "configurable": true,
-      "credential": false,
-      "value": "enable",
-      "optional": false,
-      "options": [
-        {
-          "label": "Enabled for all orgs and spaces",
-          "value": "enable"
-        },
-        {
-          "label": "Disabled for all orgs and spaces",
-          "value": "disable"
-        },
-        {
-          "label": "Leave access unchanged",
-          "value": "manual"
-        }
-      ]
+      "value": "enable"
     },
     ".properties.medium_plan_selector.active.timeout": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 3600,
-      "optional": false
+      "value": 3600
     },
     ".properties.medium_plan_selector.active.tcp_keepalive": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 60,
-      "optional": false
+      "value": 60
     },
     ".properties.medium_plan_selector.active.maxclients": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 5000,
-      "optional": false
+      "value": 5000
     },
     ".properties.medium_plan_selector.active.lua_scripting": {
-      "type": "boolean",
-      "configurable": true,
-      "credential": false,
-      "value": true,
-      "optional": false
+      "value": true
     },
     ".properties.medium_plan_selector.active.instance_limit": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 20,
-      "optional": false
+      "value": 20
     },
     ".properties.large_plan_selector": {
-      "type": "selector",
-      "configurable": true,
-      "credential": false,
-      "value": "Plan Inactive",
-      "optional": false
+      "value": "Plan Inactive"
     },
     ".properties.large_plan_selector.active.name": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "cache-large",
-      "optional": false
+      "value": "cache-large"
     },
     ".properties.large_plan_selector.active.description": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "This plan provides a large dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled",
-      "optional": false
+      "value": "This plan provides a large dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled"
     },
     ".properties.large_plan_selector.active.cf_service_access": {
-      "type": "dropdown_select",
-      "configurable": true,
-      "credential": false,
-      "value": "enable",
-      "optional": false,
-      "options": [
-        {
-          "label": "Enabled for all orgs and spaces",
-          "value": "enable"
-        },
-        {
-          "label": "Disabled for all orgs and spaces",
-          "value": "disable"
-        },
-        {
-          "label": "Leave access unchanged",
-          "value": "manual"
-        }
-      ]
+      "value": "enable"
     },
     ".properties.large_plan_selector.active.timeout": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 3600,
-      "optional": false
+      "value": 3600
     },
     ".properties.large_plan_selector.active.tcp_keepalive": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 60,
-      "optional": false
+      "value": 60
     },
     ".properties.large_plan_selector.active.maxclients": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 10000,
-      "optional": false
+      "value": 10000
     },
     ".properties.large_plan_selector.active.lua_scripting": {
-      "type": "boolean",
-      "configurable": true,
-      "credential": false,
-      "value": true,
-      "optional": false
+      "value": true
     },
     ".properties.large_plan_selector.active.instance_limit": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 20,
-      "optional": false
+      "value": 20
     },
     ".properties.backups_selector": {
-      "type": "selector",
-      "configurable": true,
-      "credential": false,
-      "value": "No Backups",
-      "optional": false
+      "value": "No Backups"
     },
     ".redis-on-demand-broker.service_instance_limit": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 20,
-      "optional": false
+      "value": 20
     },
     ".redis-on-demand-broker.vm_extensions": {
-      "type": "multi_select_options",
-      "configurable": true,
-      "credential": false,
-      "value": null,
-      "optional": true
+      "value": null
     },
     ".cf-redis-broker.service_instance_limit": {
-      "type": "integer",
-      "configurable": true,
-      "credential": false,
-      "value": 5,
-      "optional": false
+      "value": 5
     },
     ".cf-redis-broker.redis_maxmemory": {
-      "type": "string",
-      "configurable": true,
-      "credential": false,
-      "value": "512MB",
-      "optional": false
+      "value": "512MB"
     }
 }
