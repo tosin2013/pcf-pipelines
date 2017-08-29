@@ -3,7 +3,7 @@
     "name": "$FIRST_SERVICE_AZ"
   },
   "other_availability_zones": [
-    $SERVICES_NW_AZS
+    $SERVICE_AZS
   ],
   "network": {
     "name": "$SERVICES_NETWORK_NAME"

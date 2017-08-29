@@ -58,7 +58,7 @@
   },
   ".on-demand-broker.az_placement": {
     "value": [
-      $SERVICES_NW_AZS
+      $SERVICE_AZS
     ],
     "optional": false
   },
