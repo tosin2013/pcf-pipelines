@@ -78,22 +78,15 @@ pushd upgrade-tile/
 ./upgrade-ert.sh -n
 popd
 
-# Setting up install of redis
-echo -e "#############################################################################"
-echo "Setting up install of redis pipeline on $FOUNDATION_NAME"
-echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-
-pushd pipelines/install-redis/
-./install.sh -n
-popd
-
-# Setting up install of rabbit
-echo -e "#############################################################################"
-echo "Setting up install of rabbit pipeline on $FOUNDATION_NAME"
-echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-
-pushd pipelines/install-rmq/
-./install.sh -n
-popd
+# Setting up some pipelines in pipelines folder
+# if you add a pipeline to pipelines folder and add install.sh script, then run this script it will add new pipeline
+for pipeline in `ls -1d pipelines/*`;do
+   if [ -f "$pipeline/install.sh" ]; then 
+      echo -e "#############################################################################"
+      echo "Setting up pipeline $pipeline on $FOUNDATION_NAME"
+      echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
+      pushd $pipeline; ./install.sh ;popd
+   fi 
+done
 
 echo "Done."
