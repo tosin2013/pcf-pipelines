@@ -51,7 +51,9 @@
     "optional": false
   },
   ".on-demand-broker.az_placement": {
-    "value": $ARRAY_SERVICE_AZS,
+    "value": [
+      $SERVICES_NW_AZS
+    ],
     "optional": false
   },
   ".on-demand-broker.rmq_vm_type": {
