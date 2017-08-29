@@ -15,7 +15,6 @@ resources:
 
 - name: pivnet-product 
   type: pivnet
-  check_every: 4h
   source:
     api_token: ((pivnet_token))
     product_slug: p-rabbitmq 
