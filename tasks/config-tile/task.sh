@@ -2,9 +2,9 @@
 
 set -eu
 
-json_network_doc=". + $(cat pcf-pipelines/tiles/redis-network.json)"
-json_properties_doc=". + $(cat pcf-pipelines/tiles/redis-network.json)"
-json_resource_doc=". + $(cat pcf-pipelines/tiles/redis-network.json)"
+json_network_doc=". + $(cat pcf-pipelines/tiles/${PRODUCT_NAME}-network.json)"
+json_properties_doc="$(cat pcf-pipelines/tiles/${PRODUCT_NAME}-properties.json)"
+json_resource_doc="{}"
 
 tile_network=$(
   echo '{}' |
@@ -24,6 +24,6 @@ om-linux \
   --skip-ssl-validation \
   configure-product \
   --product-name $PRODUCT_NAME \
-  --product-network "$tile_network" #\
-#  --product-properties "$tile_properties" \
-#  --product-resources "$tile_resources"
+  --product-network "$tile_network" \
+  --product-properties "$json_properties_doc" \
+  --product-resources "$json_resource_doc"
