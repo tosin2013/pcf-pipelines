@@ -4,9 +4,9 @@ export JSON_SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R '(split(",") | map({name
 export ARRAY_SERVICE_AZS=$(echo $SERVICES_NW_AZS | jq -R 'split(",")')
 export FIRST_SERVICE_AZ=$(echo $SERVICES_NW_AZS | jq -R 'split(",") | .[0]')
 
-NETWORK=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-network.json)
-PROPERTIES=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-properties.json)
-RESOURCES=$(envsubst < ./pcf-pipelines/tiles/$PRODUCT_NAME-resources.json)
+NETWORK=$(erb < ./pcf-pipelines/tiles/$PRODUCT_NAME-network.json.erb)
+PROPERTIES=$(erb < ./pcf-pipelines/tiles/$PRODUCT_NAME-properties.json.erb)
+RESOURCES=$(erb < ./pcf-pipelines/tiles/$PRODUCT_NAME-resources.json.erb)
 
 echo $NETWORK | jq
 echo $PROPERTIES | jq

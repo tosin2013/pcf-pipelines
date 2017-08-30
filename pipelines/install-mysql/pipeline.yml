@@ -1,0 +1,49 @@
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+
+- name: pivnet-product 
+  type: pivnet
+  source:
+    api_token: ((pivnet_token))
+    product_slug: p-mysql 
+    product_version: ((p_mysql_version))
+    sort_by: semver
+
+jobs:
+- name: deploy 
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+    - get: pivnet-product
+      params: {globs: ["*.pivotal"]}
+
+  - task: upload-tile
+    file: pcf-pipelines/tasks/upload-tile/task.yml
+    params:
+      OPSMAN_URL: ((opsman_uri))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+
+  - task: deploy 
+    file: pcf-pipelines/tasks/install-tile/task.yml
+    params:
+      PRODUCT_NAME: p-mysql
+      OPSMAN_URL: ((opsman_uri))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SERVICES_NETWORK_NAME: ((services_network_name))
+      SERVICES_NW_AZS: ((services_nw_azs))
+      RABBITMQ_ADMIN: ((rabbitmq_admin))
+      RABBITMQ_PASSWORD: ((rabbitmq_password))
