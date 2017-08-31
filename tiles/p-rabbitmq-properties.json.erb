@@ -3,17 +3,17 @@
     "value": 30
   },
   ".properties.syslog_selector": {
-    "value": "<%= ENV['SYSLOG_HOST'] ? "enabled" : "disabled" %>
+    "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "disabled" : "enabled" %>"
   },
-  <% if ENV['SYSLOG_HOST']%>
+  <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
   ".properties.syslog_selector.active.syslog_address": {
     "value": "<%= ENV['SYSLOG_HOST']%>"
   },
   <% end %>
   ".rabbitmq-server.server_admin_credentials": {
     "value": {
-      "identity": "$RABBITMQ_ADMIN",
-      "password": "$RABBITMQ_PASSWORD"
+      "identity": "<%= ENV['RABBITMQ_ADMIN'] %>",
+      "password": "<%= ENV['RABBITMQ_PASSWORD'] %>"
     }
   },
   ".rabbitmq-server.plugins": {

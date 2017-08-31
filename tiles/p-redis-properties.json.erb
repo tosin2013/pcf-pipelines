@@ -1,12 +1,11 @@
 {
     ".properties.syslog_selector": {
-      "value": "<%= ENV['SYSLOG_HOST'] ? "enabled" : "disabled" %>
+      "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "disabled" : "enabled" %>"
     },
-    <% if ENV['SYSLOG_HOST']%>
+    <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
     ".properties.syslog_selector.active.syslog_address": {
       "value": "<%= ENV['SYSLOG_HOST']%>"
     },
-    <% end %>
     ".properties.syslog_selector.active.syslog_transport": {
       "value": "tcp"
     },
