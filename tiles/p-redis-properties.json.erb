@@ -1,6 +1,6 @@
 {
     ".properties.syslog_selector": {
-      "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "Yes" : "No" %>"
+      "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "No" : "Yes" %>"
     },
     <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
     ".properties.syslog_selector.active.syslog_address": {
