@@ -1,10 +1,10 @@
 {
     ".properties.syslog_selector": {
-      "value": "<% ENV['SYSLOG_HOST'] ? "enabled" : "disabled" %>
+      "value": "<%= ENV['SYSLOG_HOST'] ? "enabled" : "disabled" %>
     },
     <% if ENV['SYSLOG_HOST']%>
     ".properties.syslog_selector.active.syslog_address": {
-      "value": "<% ENV['SYSLOG_HOST']%>"
+      "value": "<%= ENV['SYSLOG_HOST']%>"
     },
     <% end %>
     ".properties.syslog_selector.active.syslog_transport": {
@@ -122,15 +122,3 @@
       "value": "512MB"
     }
 }
-© 2017 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About

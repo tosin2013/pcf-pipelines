@@ -3,11 +3,11 @@
     "value": 30
   },
   ".properties.syslog_selector": {
-    "value": "<% ENV['SYSLOG_HOST'] ? "enabled" : "disabled" %>
+    "value": "<%= ENV['SYSLOG_HOST'] ? "enabled" : "disabled" %>
   },
   <% if ENV['SYSLOG_HOST']%>
   ".properties.syslog_selector.active.syslog_address": {
-    "value": "<% ENV['SYSLOG_HOST']%>"
+    "value": "<%= ENV['SYSLOG_HOST']%>"
   },
   <% end %>
   ".rabbitmq-server.server_admin_credentials": {
@@ -56,7 +56,7 @@
     "optional": false
   },
   ".on-demand-broker.az_placement": {
-    "value": <% ENV['ARRAY_SERVICE_AZS'] %>,
+    "value": <%= ENV['ARRAY_SERVICE_AZS'] %>,
     ,
     "optional": false
   },
