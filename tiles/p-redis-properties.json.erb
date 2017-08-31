@@ -2,6 +2,7 @@
     ".properties.syslog_selector": {
       "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "Yes" : "No" %>"
     },
+    <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
     ".properties.syslog_selector.active.syslog_address": {
       "value": "<%= ENV['SYSLOG_HOST']%>"
     },
@@ -14,7 +15,7 @@
     ".properties.syslog_selector.active.syslog_format": {
       "value": "rfc5424"
     },
-    <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
+    <% end %>
     ".properties.metrics_polling_interval": {
       "value": 30
     },
