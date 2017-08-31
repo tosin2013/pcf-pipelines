@@ -22,28 +22,65 @@ resources:
     sort_by: semver
 
 jobs:
-- name: deploy 
+- name: upload-tile
   plan:
   - aggregate:
     - get: pcf-pipelines
     - get: pivnet-product
-      params: {globs: ["*.pivotal"]}
+      trigger: true
+      params:
+        globs:
+        - "*pivotal"
 
-  - task: upload-tile
-    file: pcf-pipelines/tasks/upload-tile/task.yml
+  - task: upload-tile-and-stemcell
+    file: pcf-pipelines/tasks/upload-product-and-stemcell/task.yml
     params:
-      OPSMAN_URL: ((opsman_uri))
-      OPSMAN_USER: ((opsman_admin_username))
-      OPSMAN_PASSWORD: ((opsman_admin_password))
+      IAAS: ((iaas_type))
+      OPS_MGR_HOST: ((opsman_uri))
+      OPS_MGR_USR: ((opsman_admin_username))
+      OPS_MGR_PWD: ((opsman_admin_password))
+      PIVNET_API_TOKEN: ((pivnet_token))
+      NO_PROXY: ""
+      OM_IP: ""
 
-  - task: deploy 
-    file: pcf-pipelines/tasks/install-tile/task.yml
+  - task: stage-tile
+    file: pcf-pipelines/tasks/stage-product/task.yml
+    params:
+      OPSMAN_USERNAME: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      OPSMAN_URI: ((opsman_uri))
+      PRODUCT_NAME: p-mysql 
+
+- name: config-tile
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+      trigger: true
+      passed: [upload-tile]
+
+  - task: config-tile
+    file: pcf-pipelines/tasks/config-tile/task.yml
     params:
       PRODUCT_NAME: p-mysql
       OPSMAN_URL: ((opsman_uri))
       OPSMAN_USER: ((opsman_admin_username))
       OPSMAN_PASSWORD: ((opsman_admin_password))
       SERVICES_NETWORK_NAME: ((services_network_name))
+      DYNAMIC_SERVICES_NETWORK_NAME: ((dynamic_services_network_name))
       SERVICES_NW_AZS: ((services_nw_azs))
-      RABBITMQ_ADMIN: ((rabbitmq_admin))
-      RABBITMQ_PASSWORD: ((rabbitmq_password))
+      SYSLOG_HOST: ((syslog_host))
+      SYSLOG_PORT: ((syslog_port))
+
+- name: product-apply-changes
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+      trigger: true
+      passed: [config-tile]
+
+  - task: apply-changes
+    file: pcf-pipelines/tasks/apply-changes/task.yml
+    params:
+      OPSMAN_USERNAME: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      OPSMAN_URI: ((opsman_uri))
