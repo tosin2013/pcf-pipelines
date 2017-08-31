@@ -15,4 +15,6 @@ echo $PROPERTIES | jq
 echo $RESOURCES
 echo $RESOURCES | jq
 
-om-linux -t $OPSMAN_URL -u $OPSMAN_USER -p $OPSMAN_PASSWORD -k configure-product -n $PRODUCT_NAME -p "$PROPERTIES" -pn "$NETWORK" -pr "$RESOURCES"
+om-linux -t $OPSMAN_URL -u $OPSMAN_USER -p $OPSMAN_PASSWORD -k configure-product -n $PRODUCT_NAME -pn "$NETWORK" 
+om-linux -t $OPSMAN_URL -u $OPSMAN_USER -p $OPSMAN_PASSWORD -k configure-product -n $PRODUCT_NAME -p "$PROPERTIES"
+om-linux -t $OPSMAN_URL -u $OPSMAN_USER -p $OPSMAN_PASSWORD -k configure-product -n $PRODUCT_NAME -pr "$RESOURCES"
