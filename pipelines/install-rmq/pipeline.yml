@@ -71,6 +71,7 @@ jobs:
       RABBITMQ_ADMIN: ((rabbitmq_admin))
       RABBITMQ_PASSWORD: ((rabbitmq_password))
       SYSLOG_HOST: ((syslog_host))
+      SYSLOG_PORT: ((syslog_port))
 
 - name: product-apply-changes
   plan:

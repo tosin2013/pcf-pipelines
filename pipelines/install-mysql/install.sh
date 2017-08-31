@@ -9,4 +9,5 @@ else
   nonint=''
 fi
 
-$FLYCMD -t $CONCOURSE_TARGET set-pipeline -p install-rabbitmq -c pipeline.yml $nonint
+
+$FLYCMD -t $CONCOURSE_TARGET set-pipeline -p install-mysql -c pipeline.yml $nonint

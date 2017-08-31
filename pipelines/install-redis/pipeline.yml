@@ -69,6 +69,8 @@ jobs:
       DYNAMIC_SERVICES_NETWORK_NAME: ((dynamic_services_network_name))
       SERVICES_NW_AZS: ((services_nw_azs))
       SYSLOG_HOST: ((syslog_host))
+      SYSLOG_PORT: ((syslog_port))
+      SYSLOG_PROTOCOL: ((syslog_protocol))
 
 - name: product-apply-changes
   plan:

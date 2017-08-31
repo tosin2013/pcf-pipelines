@@ -1,0 +1,133 @@
+{
+  "properties": {
+    ".properties.backup_options": {
+      "value": "disable"
+    },
+    ".properties.max_open_files": {
+      "value": 1048576
+    },
+    ".properties.plan_collection": {
+      "value": [
+        {
+          "guid": {
+            "value": "320b7f61-2323-499a-bb6a-ae73126a325c"
+          },
+          "name": {
+            "value": "100mb"
+          },
+          "description": {
+            "value": "100MB default"
+          },
+          "max_storage_mb": {
+            "value": 100
+          },
+          "max_user_connections": {
+            "value": 40
+          },
+          "private": {
+            "value": false
+          }
+        }
+      ],
+      "optional": false
+    },
+    ".properties.optional_protections": {
+      "value": "disable"
+    },
+    ".properties.server_activity_logging": {
+      "value": "enable"
+    },
+    ".properties.server_activity_logging.enable.audit_logging_events": {
+      "value": "connect,query"
+    },
+    ".properties.server_activity_logging.enable.server_audit_excluded_users_csv": {
+      "value": null
+    },
+    ".properties.one_property": {
+      "value": 1
+    },
+    ".properties.zero_property": {
+      "value": 0
+    },
+    ".properties.true_property": {
+      "value": true
+    },
+    ".properties.false_property": {
+      "value": false
+    },
+    ".properties.syslog": {
+      "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "disabled" : "enabled" %>"
+    },
+    <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
+    ".properties.syslog.enabled.address": {
+      "value": "<%= ENV['SYSLOG_HOST']%>"
+    },
+    ".properties.syslog.enabled.port": {
+      "value": "<%= ENV['SYSLOG_PORT']%>"
+    },
+  <% end %>
+    ".properties.buffer_pool_size": {
+      "value": "percent"
+    },
+    ".properties.buffer_pool_size.percent.buffer_pool_size_percent": {
+      "value": 50
+    },
+    ".mysql.skip_name_resolve": {
+      "value": true
+    },
+    ".mysql.innodb_large_prefix_enabled": {
+      "value": true
+    },
+    ".mysql.wsrep_debug": {
+      "value": true
+    },
+    ".mysql.mysql_start_timeout": {
+      "value": 60
+    },
+    ".mysql.metrics_polling_frequency": {
+      "value": 30
+    },
+    ".mysql.cluster_probe_timeout": {
+      "value": 10
+    },
+    ".mysql.tmp_table_size": {
+      "value": 33554432
+    },
+    ".mysql.table_open_cache": {
+      "value": 2000
+    },
+    ".mysql.table_definition_cache": {
+      "value": 8192
+    },
+    ".mysql.max_connections": {
+      "value": 1500
+    },
+    ".mysql.binlog_expire_days": {
+      "value": 7
+    },
+    ".mysql.cluster_name": {
+      "value": "cf-mariadb-galera-cluster"
+    },
+    ".mysql.innodb_strict_mode": {
+      "value": true
+    },
+    ".mysql.cli_history": {
+      "value": true
+    },
+    ".mysql.allow_remote_admin_access": {
+      "value": false
+    },
+    ".mysql.allow_local_infile": {
+      "value": true
+    },
+    ".proxy.static_ips": {
+      "value": null
+    },
+    ".proxy.shutdown_delay": {
+      "value": 0
+    },
+    ".cf-mysql-broker.bind_hostname": {
+      "value": null
+    }
+  }
+}

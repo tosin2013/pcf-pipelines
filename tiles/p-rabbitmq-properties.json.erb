@@ -6,8 +6,11 @@
     "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "disabled" : "enabled" %>"
   },
   <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
-  ".properties.syslog_selector.active.syslog_address": {
+  ".properties.syslog_selector.enabled.address": {
     "value": "<%= ENV['SYSLOG_HOST']%>"
+  },
+  ".properties.syslog_selector.enabled.port": {
+    "value": "<%= ENV['SYSLOG_PORT']%>"
   },
   <% end %>
   ".rabbitmq-server.server_admin_credentials": {
