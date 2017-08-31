@@ -14,4 +14,4 @@ params:
   FOUNDATION_NAME:
 
 run:
-  path: pcf-pipelines/tasks/install-tile/task.sh
+  path: pcf-pipelines/tasks/config-tile/task.sh
