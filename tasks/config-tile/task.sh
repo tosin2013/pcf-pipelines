@@ -8,8 +8,11 @@ NETWORK=$(erb < ./pcf-pipelines/tiles/$PRODUCT_NAME-network.json.erb)
 PROPERTIES=$(erb < ./pcf-pipelines/tiles/$PRODUCT_NAME-properties.json.erb)
 RESOURCES=$(erb < ./pcf-pipelines/tiles/$PRODUCT_NAME-resources.json.erb)
 
+echo "$NETWORK"
 echo $NETWORK | jq
+echo $PROPERTIES 
 echo $PROPERTIES | jq
+echo $RESOURCES
 echo $RESOURCES | jq
 
 om-linux -t $OPSMAN_URL -u $OPSMAN_USER -p $OPSMAN_PASSWORD -k configure-product -n $PRODUCT_NAME -p "$PROPERTIES" -pn "$NETWORK" -pr "$RESOURCES"
