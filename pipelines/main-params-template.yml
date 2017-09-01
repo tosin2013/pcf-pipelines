@@ -257,3 +257,4 @@ p_redis_version:
 p_mysql_version: 
 mysql_notification_email: 
 
+p_spring_cloud_services_version:
