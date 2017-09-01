@@ -70,6 +70,7 @@ jobs:
       SERVICES_NW_AZS: ((services_nw_azs))
       SYSLOG_HOST: ((syslog_host))
       SYSLOG_PORT: ((syslog_port))
+      MYSQL_NOTIFICATION_EMAIL: ((mysql_notification_email))
 
 - name: product-apply-changes
   plan:

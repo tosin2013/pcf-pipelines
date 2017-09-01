@@ -3,7 +3,25 @@
       "value": "disable"
     },
     ".properties.optional_protections": {
-      "value": "disable"
+      "value": "enable"
+    },
+    ".properties.optional_protections.enable.recipient_email": {
+      "value": <%= ENV['MYSQL_NOTIFICATION_EMAIL']%>
+    },
+    ".properties.optional_protections.enable.prevent_auto_rejoin": {
+      "value": false
+    },
+    ".properties.optional_protections.enable.replication_canary": {
+      "value": true
+    },
+    ".properties.optional_protections.enable.notify_only": {
+      "value": false
+    },
+    ".properties.optional_protections.enable.canary_poll_frequency": {
+      "value": 30
+    },
+    ".properties.optional_protections.enable.canary_write_read_delay": {
+      "value": 20
     },
     ".properties.server_activity_logging": {
       "value": "enable"

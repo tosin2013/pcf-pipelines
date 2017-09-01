@@ -252,3 +252,8 @@ rabbitmq_admin:
 rabbitmq_password: 
 p_rabbitmq_version: 
 
+p_redis_version: 
+
+p_mysql_version: 
+mysql_notification_email: 
+
