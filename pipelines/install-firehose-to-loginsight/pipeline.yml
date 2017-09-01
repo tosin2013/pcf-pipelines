@@ -15,9 +15,7 @@ resources:
 jobs:
 - name: add-uaa-client 
   plan:
-  - aggregate:
-    - get: pcf-pipelines
-    - get: app 
+  - get: pcf-pipelines
 
   - task: add-uaa-client 
     file: pcf-pipelines/tasks/deploy-app/task.yml
@@ -33,7 +31,11 @@ jobs:
 
 - name: deploy 
   plan:
-  - get: pcf-pipelines
+  - aggregate:
+    - get: pcf-pipelines
+      trigger: true
+      passed: [add-uaa-client]
+    - get: app 
 
   - task: deploy-app
     file: pcf-pipelines/tasks/deploy-app/task.yml
