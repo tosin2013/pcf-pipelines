@@ -49,4 +49,5 @@ jobs:
       SYSTEM_DOMAIN: ((system_domain))
       LOGINSIGHT_URL: ((loginsight_url))
       FIREHOSE_TO_LOGINISGHT_CLIENT_SECRET: ((firehose_to_loginisght_client_secret))
+      EXECUTABLE_FILE: firehose-to-loginsight
 
