@@ -1,16 +1,16 @@
 #!/bin/bash -e
 
 guid=$(om-linux \
-  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
+  --target "https://${OPSMAN_URL}" \
   --skip-ssl-validation \
-  --username "${OPSMAN_USERNAME}" \
+  --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
   curl -s -p /api/v0/deployed/products | jq -r '.[] | select(.type == "cf").guid')
 
 om-linux \
-  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
+  --target "https://${OPSMAN_URL}" \
   --skip-ssl-validation \
-  --username "${OPSMAN_USERNAME}" \
+  --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
   curl -s -p /api/v0/deployed/products/$guid/manifest > pcf-manifest.json
 
