@@ -258,3 +258,9 @@ p_mysql_version:
 mysql_notification_email: 
 
 p_spring_cloud_services_version:
+
+firehose_to_loginisght_client_secret:
+loginsight_url:
+
+system_org:
+system_space:

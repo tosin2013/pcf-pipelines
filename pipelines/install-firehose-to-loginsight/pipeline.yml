@@ -1,0 +1,50 @@
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+
+- name: app 
+  type: github-release
+  source:
+    user: pivotalservices
+    repository: firehose-to-loginsight
+
+jobs:
+- name: add-uaa-client 
+  plan:
+    aggregate:
+    - get: pcf-pipelines
+    - get: app 
+
+  - task: add-uaa-client 
+    file: pcf-pipelines/tasks/deploy-app/task.yml
+    params:
+      OPSMAN_URL: ((opsman_uri))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      CLIENT_NAME: firehose-to-loginsight
+      CLIENT_SECRET: ((firehose_to_loginisght_client_secret))
+      CLIENT_AUTHORITIES: doppler.firehose,cloud_controller.admin
+      CLIENT_GRANT_TYPES: client_credentials,refresh_token
+
+- name: deploy 
+  plan:
+  - get: pcf-pipelines
+
+  - task: deploy-app
+    file: pcf-pipelines/tasks/deploy-app/task.yml
+    params:
+      APP_NAME: firehose-to-loginsight
+      ORG: ((system_org)) 
+      SPACE: ((system_space)) 
+      OPSMAN_URL: ((opsman_uri))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      LOGINSIGHT_URL: ((loginsight_url))
+      FIREHOSE_TO_LOGINISGHT_CLIENT_SECRET: ((firehose_to_loginisght_client_secret))
+
