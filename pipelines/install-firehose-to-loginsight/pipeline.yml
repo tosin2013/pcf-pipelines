@@ -15,7 +15,7 @@ resources:
 jobs:
 - name: add-uaa-client 
   plan:
-    aggregate:
+  - aggregate:
     - get: pcf-pipelines
     - get: app 
 
