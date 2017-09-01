@@ -18,7 +18,7 @@ jobs:
   - get: pcf-pipelines
 
   - task: add-uaa-client 
-    file: pcf-pipelines/tasks/deploy-app/task.yml
+    file: pcf-pipelines/tasks/add-uaa-client/task.yml
     params:
       OPSMAN_URL: ((opsman_uri))
       OPSMAN_USER: ((opsman_admin_username))
