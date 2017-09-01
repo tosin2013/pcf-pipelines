@@ -1,0 +1,337 @@
+{
+  "properties": {
+    ".properties.encryption_key": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.product_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.app_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.app_uri": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.broker_org": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.broker_space": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.instances_org": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.instances_space": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.memory": {
+      "type": "integer",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.broker_credentials": {
+      "type": "simple_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "password": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.broker_dashboard_secret": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.worker_client_id": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".deploy-service-broker.worker_client_secret": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.instances_credentials": {
+      "type": "simple_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "p-spring-cloud-services",
+        "password": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.worker_credentials": {
+      "type": "simple_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "admin",
+        "password": "***"
+      },
+      "optional": false
+    },
+    ".deploy-service-broker.broker_max_instances": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 100,
+      "optional": false
+    },
+    ".deploy-service-broker.buildpack": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".deploy-service-broker.disable_cert_check": {
+      "type": "boolean",
+      "configurable": true,
+      "credential": false,
+      "value": false,
+      "optional": false
+    },
+    ".deploy-service-broker.instances_app_push_timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".register-service-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".register-service-broker.product_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".register-service-broker.app_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".register-service-broker.app_uri": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".register-service-broker.broker_org": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".register-service-broker.broker_space": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".register-service-broker.plan_names": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".register-service-broker.enable_global_access": {
+      "type": "boolean",
+      "configurable": true,
+      "credential": false,
+      "value": true,
+      "optional": false
+    },
+    ".run-smoke-tests.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".run-smoke-tests.product_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".run-smoke-tests.broker_org": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".run-smoke-tests.smoke_test_space": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".destroy-service-broker.product_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.app_name": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.app_uri": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.broker_org": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.broker_space": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.instances_org": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.instances_space": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.plan_names": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.worker_client_id": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".destroy-service-broker.worker_client_secret": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    }
+  }
+}
