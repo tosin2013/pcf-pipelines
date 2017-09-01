@@ -19,6 +19,7 @@ export pcf_admin_password=$(cat pcf-manifest.json | jq -r '.instance_groups[] | 
 
 cd app
 erb < ../pcf-pipelines/manifests/$APP_NAME.yml.erb > manifest.yml
+cf api https://${SYSTEM_DOMAIN} --skip-ssl-validation
 cf auth $pcf_admin_username $pcf_admin_password
 cf target -o $ORG -s $SPACE
 cf push
