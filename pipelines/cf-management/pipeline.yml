@@ -18,7 +18,7 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: create-orgs
 - name: create-spaces
   plan:
@@ -29,7 +29,7 @@ jobs:
     file: pcf-pipelines/ci/tasks/cf-mgmt.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: create-spaces
 - name: update-spaces
   plan:
@@ -40,7 +40,7 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-spaces
 - name: update-space-users
   plan:
@@ -53,7 +53,7 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-space-users
 - name: update-space-quotas
   plan:
@@ -64,7 +64,7 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-space-quotas
 - name: update-space-security-groups
   plan:
@@ -75,7 +75,7 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-space-security-groups
 - name: update-org-users
   plan:
@@ -88,7 +88,7 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-org-users
 - name: update-org-quotas
   plan:
@@ -99,6 +99,6 @@ jobs:
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
       SYSTEM_DOMAIN: ((system_domain))
-      LDAP_PASSWORD: ((ldap_password))
+      LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-org-quotas
 
