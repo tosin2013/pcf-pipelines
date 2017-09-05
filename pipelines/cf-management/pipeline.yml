@@ -1,0 +1,104 @@
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+- name: 15m
+  type: time
+  source: {interval: 15m}
+
+jobs:
+- name: create-orgs
+  plan:
+  - get: pcf-pipelines
+    trigger: true
+  - task: create-orgs
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: create-orgs
+- name: create-spaces
+  plan:
+  - get: pcf-pipelines
+    passed: [create-orgs]
+    trigger: true
+  - task: create-spaces
+    file: pcf-pipelines/ci/tasks/cf-mgmt.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: create-spaces
+- name: update-spaces
+  plan:
+  - get: pcf-pipelines
+    passed: [create-spaces]
+    trigger: true
+  - task: update-spaces
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: update-spaces
+- name: update-space-users
+  plan:
+  - get: pcf-pipelines
+    passed: [create-spaces]
+    trigger: true
+  - get: 15m
+    trigger: true
+  - task: update-space-users
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: update-space-users
+- name: update-space-quotas
+  plan:
+  - get: pcf-pipelines
+    passed: [create-spaces]
+    trigger: true
+  - task: update-space-quotas
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: update-space-quotas
+- name: update-space-security-groups
+  plan:
+  - get: pcf-pipelines
+    passed: [create-spaces]
+    trigger: true
+  - task: update-space-security-groups
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: update-space-security-groups
+- name: update-org-users
+  plan:
+  - get: pcf-pipelines
+    passed: [create-orgs]
+    trigger: true
+  - get: 15m
+    trigger: true
+  - task: update-org-users
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: update-org-users
+- name: update-org-quotas
+  plan:
+  - get: pcf-pipelines
+    passed: [create-orgs]
+    trigger: true
+  - task: update-org-quotas
+    file: pcf-pipelines/tasks/cf-management/task.yml
+    params:
+      SYSTEM_DOMAIN: ((system_domain))
+      LDAP_PASSWORD: ((ldap_password))
+      CF_MGMT_COMMAND: update-org-quotas
+
