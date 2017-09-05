@@ -10,4 +10,4 @@ else
 fi
 
 
-$FLYCMD -t $CONCOURSE_TARGET set-pipeline -p i=cf-management -c pipeline.yml $nonint
+$FLYCMD -t $CONCOURSE_TARGET set-pipeline -p cf-management -c pipeline.yml $nonint
