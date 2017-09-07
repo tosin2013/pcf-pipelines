@@ -7,7 +7,7 @@ image_resource:
 
 inputs:
   - name: pcf-pipelines
+  - name: release 
 
 run:
-  path: pcf-pipelines/tasks/cf-management/task.sh
-
+  path: pcf-pipelines/tasks/upload-bosh-release/task.sh

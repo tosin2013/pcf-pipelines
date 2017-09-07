@@ -5,16 +5,20 @@ resources:
     uri: ((git_repo)) 
     branch: ((git_branch))
     skip_ssl_verification: true
+- name: release
+  type: bosh-io-release
+  source:
+    repository: cppforlife/turbulence-release
 
 
 jobs:
 - name: deploy-turbulence
   plan:
   - get: pcf-pipelines
+  - get: release
+  - task: upload-release 
+    file: pcf-pipelines/tasks/upload-bosh-release/task.yml
   - task: deploy-turbulence
     file: pipeline-repo/ci/tasks/deploy.yml
     params:
-      VAULT_ADDR: {{vault-address}}
-      VAULT_TOKEN: {{vault-token}}
-      FOUNDATION_NAME: {{foundation-name}}
-      PRODUCT_NAME: {{product-name}}
+      DEPLOYMENT_NAME: turbulence
