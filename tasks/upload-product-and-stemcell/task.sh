@@ -3,7 +3,7 @@
 set -eu
 
 if [[ -n "$NO_PROXY" ]]; then
-  echo "$OM_IP $OPS_MGR_HOST" >> /etc/hosts
+  echo "$OM_IP $OPSMAN_DOMAIN_OR_IP_ADDRESS" >> /etc/hosts
 fi
 
 STEMCELL_VERSION=$(
@@ -14,14 +14,19 @@ STEMCELL_VERSION=$(
       .Dependencies[]
       | select(.Release.Product.Name | contains("Stemcells"))
       | .Release.Version
-    ] | sort | last // empty
+    ]
+    | map(split(".") | map(tonumber))
+    | transpose | transpose
+    | max // empty
+    | map(tostring)
+    | join(".")
     '
 )
 
 if [ -n "$STEMCELL_VERSION" ]; then
   diagnostic_report=$(
     om-linux \
-      --target https://$OPS_MGR_HOST \
+      --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
       --username $OPS_MGR_USR \
       --password $OPS_MGR_PWD \
       --skip-ssl-validation \
@@ -38,8 +43,20 @@ if [ -n "$STEMCELL_VERSION" ]; then
 
   if [[ -z "$stemcell" ]]; then
     echo "Downloading stemcell $STEMCELL_VERSION"
+
+    product_slug=$(
+      jq --raw-output \
+        '
+        if any(.Dependencies[]; select(.Release.Product.Name | contains("Stemcells for PCF (Windows)"))) then
+          "stemcell-windows-server"
+        else
+          "stemcells"
+        end
+        ' < pivnet-product/metadata.json
+    )
+
     pivnet-cli login --api-token="$PIVNET_API_TOKEN"
-    pivnet-cli download-product-files -p stemcells -r $STEMCELL_VERSION -g "*${IAAS}*" --accept-eula
+    pivnet-cli download-product-files -p "$product_slug" -r $STEMCELL_VERSION -g "*${IAAS}*" --accept-eula
 
     SC_FILE_PATH=`find ./ -name *.tgz`
 
@@ -48,9 +65,9 @@ if [ -n "$STEMCELL_VERSION" ]; then
       exit 1
     fi
 
-    om-linux -t https://$OPS_MGR_HOST -u $OPS_MGR_USR -p $OPS_MGR_PWD -k upload-stemcell -s $SC_FILE_PATH
+    om-linux -t https://$OPSMAN_DOMAIN_OR_IP_ADDRESS -u $OPS_MGR_USR -p $OPS_MGR_PWD -k upload-stemcell -s $SC_FILE_PATH
   fi
 fi
 
 FILE_PATH=`find ./pivnet-product -name *.pivotal`
-om-linux -t https://$OPS_MGR_HOST -u $OPS_MGR_USR -p $OPS_MGR_PWD -k --request-timeout 3600 upload-product -p $FILE_PATH
+om-linux -t https://$OPSMAN_DOMAIN_OR_IP_ADDRESS -u $OPS_MGR_USR -p $OPS_MGR_PWD -k --request-timeout 3600 upload-product -p $FILE_PATH
