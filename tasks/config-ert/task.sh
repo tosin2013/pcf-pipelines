@@ -456,7 +456,7 @@ cf_resources=$(
       "uaadb": { "instances": $uaadb_instances },
       "uaa": { "instances": $uaa_instances },
       "cloud_controller": { "instances": $cloud_controller_instances },
-      "ha_proxy": { "instances": $ha_proxy_instances, "elb_names": $ha_proxy_elb_name },
+      "ha_proxy": { "instances": $ha_proxy_instances },
       "router": { "instances": $router_instances },
       "mysql_monitor": { "instances": $mysql_monitor_instances },
       "clock_global": { "instances": $clock_global_instances },
