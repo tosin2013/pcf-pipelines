@@ -16,7 +16,7 @@ vcenter_data_center:  # vCenter datacenter
 # Ops Manager VM configuration
 om_vm_host:               # Optional - vCenter host to deploy Ops Manager in
 om_data_store:  # vCenter datastore name to deploy Ops Manager in
-opsman_uri:  # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
+opsman_domain_or_ip_address:  # FQDN to access Ops Manager without protocol (will use https), ex: opsmgr.example.com
 opsman_admin_username:  # Username for Ops Manager admin account
 opsman_admin_password:  # Password for Ops Manager admin account
 om_ssh_pwd:  # SSH password for Ops Manager (ssh user is ubuntu)
@@ -114,6 +114,8 @@ syslog_drain_buffer_size: 10000
 
 ssl_cert: # Optional. Will be generated if blank using ssl_termination_point below.
 ssl_private_key: # Optional. Will be generated if blank using ssl_termination_point below.
+saml_ssl_cert:
+saml_ssl_private_key:
 ssl_termination_point:  # (external_ssl|external_non_ssl|haproxy)
 
 disable_http_proxy: 
@@ -225,8 +227,6 @@ diego_brain_nsx_lb_port:
 ## Upgrade
 opsman_timeout_seconds: 3600 # time to wait for new OM VM to come up
 opsman_ssh_password:    # ubuntu user ssh password
-opsman_major_minor_version: ^1\.11\..*$  # Ops Manager minor version to track
-opsman_uri: 
 opsman_passphrase: 
 vcenter_url: 
 vcenter_username: 

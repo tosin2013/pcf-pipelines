@@ -17,6 +17,9 @@ jobs:
   - task: create-orgs
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: create-orgs
@@ -28,6 +31,9 @@ jobs:
   - task: create-spaces
     file: pcf-pipelines/ci/tasks/cf-mgmt.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: create-spaces
@@ -39,6 +45,9 @@ jobs:
   - task: update-spaces
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-spaces
@@ -52,6 +61,9 @@ jobs:
   - task: update-space-users
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-space-users
@@ -63,6 +75,9 @@ jobs:
   - task: update-space-quotas
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-space-quotas
@@ -74,6 +89,9 @@ jobs:
   - task: update-space-security-groups
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-space-security-groups
@@ -87,6 +105,9 @@ jobs:
   - task: update-org-users
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-org-users
@@ -98,6 +119,9 @@ jobs:
   - task: update-org-quotas
     file: pcf-pipelines/tasks/cf-management/task.yml
     params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       LDAP_PASSWORD: ((ldap_pwd))
       CF_MGMT_COMMAND: update-org-quotas
