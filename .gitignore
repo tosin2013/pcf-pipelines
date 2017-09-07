@@ -1,5 +1,4 @@
 .DS_Store
-config
 *.iml
 .idea
 *.sw[po]

@@ -1,0 +1,10 @@
+enabled: true
+ldapHost: "ldap.vmware.com"
+ldapPort: 389
+use_tls: false
+bindDN: "CN=svc.pcfpipeline,OU=Generic,OU=ServiceAccounts,OU=Corp,OU=Common,DC=vmware,DC=com"
+userSearchBase: "cn=Users,dc=vmware,dc=com"
+userNameAttribute: "mail"
+userMailAttribute: "mail"
+groupSearchBase: "OU=Generic,OU=Groups,OU=Corp,OU=Common,DC=vmware,DC=com"
+groupAttribute: "member"
