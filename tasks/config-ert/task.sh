@@ -466,7 +466,6 @@ cf_resources=$(
       "loggregator_trafficcontroller": { "instances": $loggregator_tc_instances },
       "tcp_router": { "instances": $tcp_router_instances },
       "syslog_adapter": { "instances": $syslog_adapter_instances },
-      "syslog_scheduler": { "instances": $syslog_scheduler_instances },
       "doppler": { "instances": $doppler_instances }
     }
 
