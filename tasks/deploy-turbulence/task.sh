@@ -9,5 +9,5 @@ bosh -n -d turbulence deploy manifest.yml \
   -v director_ip=$BOSH_IP \
   --var-file director_ssl_ca=$DIRECTOR_CA_CERT \
   -v director_client=$BOSH_CLIENT \
-  -v director_client_secret=$BOSH_CLIENT_SECRET \
-  --vars-store ./creds.yml
+  -v director_client_secret=$BOSH_CLIENT_SECRET 
+

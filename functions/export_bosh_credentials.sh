@@ -1,29 +1,45 @@
 #!/bin/bash -e
 
-export pcf_admin_username=$(om-linux \
-  --target "https://${OPSMAN_URL}" \
+export bosh_user=$(om-linux \
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
-  credentials  -p cf -c .uaa.admin_credentials -f identity)
+  curl -p  /api/v0/deployed/director/credentials/director_credentials | jq -r ".credential.value.identity")
 
-export pcf_admin_password=$(om-linux \
-  --target "https://${OPSMAN_URL}" \
+export bosh_password=$(om-linux \
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
-  credentials  -p cf -c .uaa.admin_credentials -f password)
+  curl -p  /api/v0/deployed/director/credentials/director_credentials | jq -r ".credential.value.password")
 
-export uaa_admin_client=$(om-linux \
-  --target "https://${OPSMAN_URL}" \
+export bosh_client=$(om-linux \
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
-  credentials  -p cf -c .uaa.admin_client_credentials -f identity)
+  curl -p /api/v0/deployed/director/credentials/uaa_bbr_client_credentials | jq -r ".credential.value.identity")
 
-export uaa_admin_client_secret=$(om-linux \
-  --target "https://${OPSMAN_URL}" \
+export bosh_client_secret=$(om-linux \
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
-  credentials  -p cf -c .uaa.admin_client_credentials -f password)
+  curl  -p /api/v0/deployed/director/credentials/uaa_bbr_client_credentials | jq -r ".credential.value.password")
+
+export bosh_ca=$(om-linux \
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
+  --skip-ssl-validation \
+  --username "${OPSMAN_USER}" \
+  --password "${OPSMAN_PASSWORD}" \
+  curl  -p /api/v0/certificate_authorities | jq -r ".certificate_authorities[] | select(.active==true).cert_pem")
+
+
+export bosh_ip=$(om-linux \
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
+  --skip-ssl-validation \
+  --username "${OPSMAN_USER}" \
+  --password "${OPSMAN_PASSWORD}" \
+  curl  -p /api/v0/deployed/director/manifest | jq -r ".jobs[0].networks[0].static_ips[0]")
+

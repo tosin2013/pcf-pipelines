@@ -21,6 +21,4 @@ jobs:
   - task: deploy-turbulence
     file: pipeline-repo/ci/tasks/deploy.yml
     params:
-      DEPLOYMENT_NAME: turbulence
-      TURBULENCE_API_PASSWORD: ((turbulence_api_password))
-      TURBULENCE_API_CERT: ((turbulence_api_cert))
+      TURBULENCE_API_IP: ((turbulence_api_ip))
