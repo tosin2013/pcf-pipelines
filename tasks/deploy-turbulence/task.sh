@@ -2,9 +2,7 @@
 
 source ./pcf-pipelines/functions/export_bosh_credentials.sh
 
-erb < ../pcf-pipelines/bosh-manifests/turbulence.yml.erb > manifest.yml
-
-bosh -n -d turbulence deploy manifest.yml \
+bosh -n -d turbulence deploy ./pcf-pipelines/tasks/deploy-turbulence/turbulence.yml \
   -v turbulence_api_ip=$TURBULENCE_API_IP \
   -v director_ip=$BOSH_IP \
   --var-file director_ssl_ca=$DIRECTOR_CA_CERT \
