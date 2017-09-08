@@ -5,7 +5,6 @@
     plan:
     - aggregate:
       - get: pcf-pipelines
-      - get: vault
       - get: pcf-ops-manager
         params: {globs: []}
         passed: [deploy-ert]
