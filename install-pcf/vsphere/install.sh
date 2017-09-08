@@ -9,7 +9,7 @@ else
   nonint=''
 fi
 
-yaml-patch -o ../../operations/use-different-git-repo.yml <pipeline.yml > tmp-pipeline.yml
+yaml-patch -o ../../operations/use-different-git-repo.yml -o ../../operations/add-update-cloud-config.yml <pipeline.yml > tmp-pipeline.yml
 sed -i -e "s/{{/((/g" -e "s/}}/))/g" tmp-pipeline.yml 
 
 $FLYCMD -t $CONCOURSE_TARGET set-pipeline -p install-opsman-n-cf -c tmp-pipeline.yml $nonint

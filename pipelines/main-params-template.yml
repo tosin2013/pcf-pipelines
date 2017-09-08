@@ -90,6 +90,7 @@ services_excluded_range:  # Services network exclusion range
 services_nw_dns:  # Services network DNS
 services_nw_gateway:  # Services network Gateway
 services_nw_azs: # Comma separated list of AZ's to be associated with this network
+services_network_static_ips:
 
 dynamic_services_network_name: "DYNAMIC-SERVICES"
 dynamic_services_vsphere_network:      # vCenter Dynamic Services network name
