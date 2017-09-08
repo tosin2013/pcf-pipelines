@@ -7,7 +7,6 @@ image_resource:
 
 inputs:
   - name: pcf-pipelines
-  - name: release 
 
 run:
   path: pcf-pipelines/tasks/update-cloud-config/task.sh
