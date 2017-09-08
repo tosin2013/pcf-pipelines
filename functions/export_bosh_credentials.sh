@@ -1,34 +1,20 @@
 #!/bin/bash -e
 
-export bosh_user=$(om-linux \
-  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
-  --skip-ssl-validation \
-  --username "${OPSMAN_USER}" \
-  --password "${OPSMAN_PASSWORD}" \
-  curl -p  /api/v0/deployed/director/credentials/director_credentials | jq -r ".credential.value.identity")
-
-export bosh_password=$(om-linux \
-  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
-  --skip-ssl-validation \
-  --username "${OPSMAN_USER}" \
-  --password "${OPSMAN_PASSWORD}" \
-  curl -p  /api/v0/deployed/director/credentials/director_credentials | jq -r ".credential.value.password")
-
-export bosh_client=$(om-linux \
+export BOSH_CLIENT=$(om-linux \
   --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
   curl -p /api/v0/deployed/director/credentials/uaa_bbr_client_credentials | jq -r ".credential.value.identity")
 
-export bosh_client_secret=$(om-linux \
+export BOSH_CLIENT_SECRET=$(om-linux \
   --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
   curl  -p /api/v0/deployed/director/credentials/uaa_bbr_client_credentials | jq -r ".credential.value.password")
 
-export bosh_ca=$(om-linux \
+export BOSH_CA_CERT=$(om-linux \
   --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
@@ -36,7 +22,7 @@ export bosh_ca=$(om-linux \
   curl  -p /api/v0/certificate_authorities | jq -r ".certificate_authorities[] | select(.active==true).cert_pem")
 
 
-export bosh_ip=$(om-linux \
+export BOSH_ENVIRONMENT=$(om-linux \
   --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
