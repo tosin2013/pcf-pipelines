@@ -30,7 +30,7 @@ instance_groups:
   vm_type: medium 
   stemcell: default
   networks:
-  - name: SERVICES 
+  - name: DYNAMIC-SERVICES 
     static_ips: [((turbulence_api_ip))]
 
 update:
