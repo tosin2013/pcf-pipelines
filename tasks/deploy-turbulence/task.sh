@@ -7,5 +7,6 @@ bosh -n -d turbulence deploy ./pcf-pipelines/tasks/deploy-turbulence/turbulence.
   -v director_ip=$BOSH_ENVIRONMENT \
   -v director_ssl_ca="$BOSH_CA_CERT" \
   -v director_client=$BOSH_CLIENT \
-  -v director_client_secret=$BOSH_CLIENT_SECRET 
+  -v director_client_secret=$BOSH_CLIENT_SECRET \
+  --vars-store=vars.yml
 
