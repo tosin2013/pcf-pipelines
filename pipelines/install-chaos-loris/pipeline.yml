@@ -1,0 +1,81 @@
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+- name: chaos-loris-repo
+  type: git 
+  source:
+    uri: https://github.com/Altoros/chaos-loris.git
+    branch: develop
+- name: service-broker-repo
+  type: git 
+  source:
+    uri: https://github.com/Altoros/cf-chaos-loris-broker.git
+- name: simple-victim-app
+  type: git 
+  source:
+    uri: https://github.com/allomov/super-simple-sintara-app.git
+
+jobs:
+- name: deploy-chaos-loris
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+    - get: chaos-loris-repo
+  - task: build
+    file: pcf-pipelines/tasks/chos-loris/build.yml
+  - task: deploy
+    file: pcf-pipelines/tasks/chos-loris/deploy.yml
+    params: 
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      APPS_DOMAIN: ((apps_domain))
+
+- name: deploy-service-broker
+  plan:
+  - aggregate:
+    - get: service-broker-repo 
+    - get: pipeline-repo
+#      passed: [deploy-chaos-loris]
+  - task: build
+    file: pcf-pipelines/tasks/chos-loris/build-service-broker.yml
+  - task: deploy
+    file: pcf-pipelines/tasks/chos-loris/deploy-service-broker.yml
+    params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      APPS_DOMAIN: ((apps_domain))
+
+- name: register-service-broker
+  plan:
+  - aggregate:
+    - get: pipeline-repo
+#      passed: [deploy-service-broker]
+  - task: register
+    file: pcf-pipelines/tasks/chos-loris/register-service-broker.yml
+    params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      APPS_DOMAIN: ((apps_domain))
+- name: acceptance-test
+  plan:
+  - aggregate:
+    - get: pipeline-repo
+    - get: simple-victim-app
+  - task: run-app-test
+    file: pcf-pipelines/tasks/chos-loris/run-app-test.yml
+    params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      APPS_DOMAIN: ((apps_domain))
