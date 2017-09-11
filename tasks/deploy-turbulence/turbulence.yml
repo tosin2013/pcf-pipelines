@@ -13,7 +13,7 @@ stemcells:
 instance_groups:
 - name: api 
   instances: 1
-  azs: [ az1 ]
+  azs: [ AZ1 ]
   jobs:
   - name: turbulence_api
     release: turbulence
