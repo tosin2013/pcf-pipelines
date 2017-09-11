@@ -40,7 +40,7 @@ jobs:
   plan:
   - aggregate:
     - get: service-broker-repo 
-    - get: pipeline-repo
+    - get: pcf-pipelines
 #      passed: [deploy-chaos-loris]
   - task: build
     file: pcf-pipelines/tasks/chos-loris/build-service-broker.yml
@@ -56,7 +56,7 @@ jobs:
 - name: register-service-broker
   plan:
   - aggregate:
-    - get: pipeline-repo
+    - get: pcf-pipelines
 #      passed: [deploy-service-broker]
   - task: register
     file: pcf-pipelines/tasks/chos-loris/register-service-broker.yml
@@ -69,7 +69,7 @@ jobs:
 - name: acceptance-test
   plan:
   - aggregate:
-    - get: pipeline-repo
+    - get: pcf-pipelines
     - get: simple-victim-app
   - task: run-app-test
     file: pcf-pipelines/tasks/chos-loris/run-app-test.yml
