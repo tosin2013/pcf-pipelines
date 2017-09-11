@@ -8,7 +8,7 @@ image_resource:
     tag: v1.3
 
 run:
-  path: pcf-pipelines/tasks/chos-loris/register-service-broker.sh
+  path: pcf-pipelines/tasks/chaos-loris/register-service-broker.sh
 
 inputs:
 - name: pcf-pipelines 

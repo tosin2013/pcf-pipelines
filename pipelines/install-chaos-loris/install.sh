@@ -10,4 +10,4 @@ else
 fi
 
 
-$FLYCMD -t $CONCOURSE_TARGET set-pipeline -p install-chos-loris -c pipeline.yml $nonint
+$FLYCMD -t $CONCOURSE_TARGET set-pipeline -p install-chaos-loris -c pipeline.yml $nonint

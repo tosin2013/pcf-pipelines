@@ -26,9 +26,9 @@ jobs:
     - get: pcf-pipelines
     - get: chaos-loris-repo
   - task: build
-    file: pcf-pipelines/tasks/chos-loris/build.yml
+    file: pcf-pipelines/tasks/chaos-loris/build.yml
   - task: deploy
-    file: pcf-pipelines/tasks/chos-loris/deploy.yml
+    file: pcf-pipelines/tasks/chaos-loris/deploy.yml
     params: 
       OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
       OPSMAN_USER: ((opsman_admin_username))
@@ -43,9 +43,9 @@ jobs:
     - get: pcf-pipelines
 #      passed: [deploy-chaos-loris]
   - task: build
-    file: pcf-pipelines/tasks/chos-loris/build-service-broker.yml
+    file: pcf-pipelines/tasks/chaos-loris/build-service-broker.yml
   - task: deploy
-    file: pcf-pipelines/tasks/chos-loris/deploy-service-broker.yml
+    file: pcf-pipelines/tasks/chaos-loris/deploy-service-broker.yml
     params:
       OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
       OPSMAN_USER: ((opsman_admin_username))
@@ -59,7 +59,7 @@ jobs:
     - get: pcf-pipelines
 #      passed: [deploy-service-broker]
   - task: register
-    file: pcf-pipelines/tasks/chos-loris/register-service-broker.yml
+    file: pcf-pipelines/tasks/chaos-loris/register-service-broker.yml
     params:
       OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
       OPSMAN_USER: ((opsman_admin_username))
@@ -72,7 +72,7 @@ jobs:
     - get: pcf-pipelines
     - get: simple-victim-app
   - task: run-app-test
-    file: pcf-pipelines/tasks/chos-loris/run-app-test.yml
+    file: pcf-pipelines/tasks/chaos-loris/run-app-test.yml
     params:
       OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
       OPSMAN_USER: ((opsman_admin_username))

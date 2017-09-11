@@ -8,7 +8,7 @@ image_resource:
     tag: v1.3
 
 run:
-  path: pcf-pipelines/tasks/chos-loris/deploy.sh
+  path: pcf-pipelines/tasks/chaos-loris/deploy.sh
 
 inputs:
 - name: pcf-pipelines 

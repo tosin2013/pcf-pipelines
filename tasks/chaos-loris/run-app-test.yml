@@ -8,7 +8,7 @@ image_resource:
     tag: "v1.5"
 
 run:
-  path: pcf-pipelines/tasks/chos-loris/run-app-test.sh
+  path: pcf-pipelines/tasks/chaos-loris/run-app-test.sh
 
 inputs:
 - name: pcf-pipelines 
