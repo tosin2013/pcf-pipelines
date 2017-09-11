@@ -45,11 +45,12 @@ variables:
 - name: turbulence_api_ca
   type: certificate
   options:
+    is_ca: true
     common_name: turbulence_api_ca
 - name: turbulence_api_cert
   type: certificate
   options:
     ca: turbulence_api_ca
     common_name: ((turbulence_api_ip))
-    alternative_names: [((turbulence_api_ip))]
-
+    alternative_names:
+    - ((turbulence_api_ip))
