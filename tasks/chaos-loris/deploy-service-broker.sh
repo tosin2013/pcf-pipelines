@@ -3,11 +3,12 @@
 set -e
 
 source ./pcf-pipelines/functions/export_cf_credentials.sh
-cf api https://api.${SYSTEM_DOMAIN} --skip-ssl-validation
-cf auth $pcf_admin_username $pcf_admin_password
+source ./pcf-pipelines/functions/cf-helpers.sh
+cf_authenticate_and_target
+cf_target_org_and_space system chaos-loris
 cf target -o $ORG -s $SPACE
 
-cf_create_service p-mysql 10mb chaos-loris-broker-db
+cf_create_service p-mysql 100mb chaos-loris-broker-db
 
 cd binary
 cat > manifest.yml <<EOS
