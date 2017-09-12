@@ -10,7 +10,7 @@ cf_authenticate_and_target
 cf_target_org_and_space system chaos-loris
 cf target -o $ORG -s $SPACE
 
-cf_ create-service p-mysql 100mb chaos-loris-broker-db
+cf_create-service p-mysql 100mb chaos-loris-broker-db
 
 cd binary
 cat > manifest.yml <<EOS
