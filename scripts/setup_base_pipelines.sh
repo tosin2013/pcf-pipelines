@@ -2,24 +2,21 @@
 set -e
 
 ## set main if no concourse team identified
-#: ${CONCOURSE_TEAM:-main}
 
 ## Assumptions: we will assume that credentials are already uploaded to vault and concourse
 ## has been integrated to read from it. 
 
 ## Checking to ensure variables are set.
 ## We are using direnv to save project level configs in .envrc files
-if [[ -z $CONCOURSE_URI || -z $CONCOURSE_TARGET || \
+if [[ -z $CONCOURSE_URI ||  \
       -z $CONCOURSE_USER || -z $CONCOURSE_PASSWORD || \
-      -z $CONCOURSE_TEAM || -z $FLYCMD || \
+      -z $FLYCMD || \
       -z $FOUNDATION_NAME ]]; then
   echo "one the following environment variables is not set: "
   echo ""
   echo "                 CONCOURSE_URI"
-  echo "                 CONCOURSE_TARGET"
   echo "                 CONCOURSE_USER"
   echo "                 CONCOURSE_PASSWORD"
-  echo "                 CONCOURSE_TEAM"
   echo "                 FLY_CMD"
   echo "                 FOUNDATION_NAME"
   echo ""
@@ -27,7 +24,7 @@ if [[ -z $CONCOURSE_URI || -z $CONCOURSE_TARGET || \
 fi
 
 echo -e "#############################################################################"
-echo "Updating $FOUNDATION_NAME management pipeline on $CONCOURSE_TARGET concourse."
+echo "Updating $FOUNDATION_NAME management pipeline on $FOUNDATION_NAME concourse."
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
 
 ## Release candidate of fly has non-interactive version for set-team
@@ -35,21 +32,21 @@ FLYRC=/usr/local/bin/fly-rc
 
 ## Login to main team to set target
 echo -e "#############################################################################"
-echo "Login on to main team on $CONCOURSE_TARGET concourse to set target"
+echo "Login on to main team on $FOUNDATION_NAME concourse to set target"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-$FLYCMD -t $CONCOURSE_TARGET login -c $CONCOURSE_URI -u $CONCOURSE_USER -p $CONCOURSE_PASSWORD -k
+$FLYCMD -t $FOUNDATION_NAME login -c $CONCOURSE_URI -u $CONCOURSE_USER -p $CONCOURSE_PASSWORD -k
 
 ## Create team
 echo -e "#############################################################################"
-echo "Creating team or updating password for $CONCOURSE_TARGET concourse with team $CONCOURSE_TEAM"
+echo "Creating team or updating password for $FOUNDATION_NAME concourse with team $FOUNDATION_NAME"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-$FLYRC  -t $CONCOURSE_TARGET set-team  --basic-auth-username=$CONCOURSE_USER --basic-auth-password=$CONCOURSE_PASSWORD -n $CONCOURSE_TEAM --non-interactive
+$FLYRC  -t $FOUNDATION_NAME set-team  --basic-auth-username=$CONCOURSE_USER --basic-auth-password=$CONCOURSE_PASSWORD -n $FOUNDATION_NAME --non-interactive
 
 # Login to team we created
 echo -e "#############################################################################"
-echo "Login to $CONCOURSE_TARGET with team we created, $CONCOURSE_TEAM"
+echo "Login to $FOUNDATION_NAME with team we created, $FOUNDATION_NAME"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
-$FLYCMD -t $CONCOURSE_TARGET login -c $CONCOURSE_URI -u $CONCOURSE_USER -p $CONCOURSE_PASSWORD -n $CONCOURSE_TEAM -k
+$FLYCMD -t $FOUNDATION_NAME login -c $CONCOURSE_URI -u $CONCOURSE_USER -p $CONCOURSE_PASSWORD -n $FOUNDATION_NAME -k
 
 # Setting deploy PCF and ERT pipeline
 echo -e "#############################################################################"
