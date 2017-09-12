@@ -20,7 +20,7 @@ applications:
   path: .
   command: ./cf-chaos-loris-broker -c plans.yml
   env:
-    CHAOS_LORIS_HOST: https://chaos-loris.app.$APPS_DOMAIN
+    CHAOS_LORIS_HOST: https://chaos-loris.$APPS_DOMAIN
   services:
   - chaos-loris-broker-db
 EOS
