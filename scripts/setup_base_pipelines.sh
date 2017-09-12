@@ -23,6 +23,8 @@ if [[ -z $CONCOURSE_URI ||  \
   exit 1
 fi
 
+ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
 echo -e "#############################################################################"
 echo "Updating $FOUNDATION_NAME management pipeline on $FOUNDATION_NAME concourse."
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
@@ -53,7 +55,7 @@ echo -e "#######################################################################
 echo "Setting up pipeline for deploying PCF (Operations Manager and ERT) on $FOUNDATION_NAME"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
 
-pushd ../install-pcf/vsphere/
+pushd $ROOT_DIR/install-pcf/vsphere/
 ./install.sh -n
 popd
 
@@ -62,7 +64,7 @@ echo -e "#######################################################################
 echo "Setting up upgrade Ops Manager pipeline on $FOUNDATION_NAME"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
 
-pushd ../upgrade-ops-manager/vsphere/
+pushd $ROOT_DIR/upgrade-ops-manager/vsphere/
 ./upgrade.sh -n
 popd
 
@@ -71,13 +73,13 @@ echo -e "#######################################################################
 echo "Setting up upgrade Elastic Runtime pipeline on $FOUNDATION_NAME"
 echo -e "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
 
-pushd ../upgrade-tile/
+pushd $ROOT_DIR/upgrade-tile/
 ./upgrade-ert.sh -n
 popd
 
 # Setting up some pipelines in pipelines folder
 # if you add a pipeline to pipelines folder and add install.sh script, then run this script it will add new pipeline
-for pipeline in `ls -1d ../pipelines/*`;do
+for pipeline in `ls -1d $ROOT_DIR/pipelines/*`;do
    if [ -f "$pipeline/install.sh" ]; then 
       echo -e "#############################################################################"
       echo "Setting up pipeline $pipeline on $FOUNDATION_NAME"
