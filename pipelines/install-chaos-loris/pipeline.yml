@@ -35,8 +35,6 @@ jobs:
       OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       APPS_DOMAIN: ((apps_domain))
-      ORG: ((system_org)) 
-      SPACE: ((system_space)) 
 
 - name: deploy-service-broker
   plan:
@@ -54,8 +52,6 @@ jobs:
       OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       APPS_DOMAIN: ((apps_domain))
-      ORG: ((system_org)) 
-      SPACE: ((system_space)) 
 
 - name: register-service-broker
   plan:
@@ -70,8 +66,6 @@ jobs:
       OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       APPS_DOMAIN: ((apps_domain))
-      ORG: ((system_org)) 
-      SPACE: ((system_space)) 
 - name: acceptance-test
   plan:
   - aggregate:
@@ -85,5 +79,3 @@ jobs:
       OPSMAN_PASSWORD: ((opsman_admin_password))
       SYSTEM_DOMAIN: ((system_domain))
       APPS_DOMAIN: ((apps_domain))
-      ORG: ((system_org)) 
-      SPACE: ((system_space)) 
