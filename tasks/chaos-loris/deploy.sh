@@ -8,7 +8,7 @@ source ./pcf-pipelines/functions/cf-helpers.sh
 
 cf_authenticate_and_target
 cf_target_org_and_space system chaos-loris
-cf_create_service p-mysql 10mb chaos-loris-db
+cf_create_service p-mysql 100mb chaos-loris-db
 
 
 pushd binary
