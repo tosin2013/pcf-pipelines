@@ -1,9 +1,9 @@
-if [[ -z $CF_API_URL || -z $CF_ADMIN_USERNAME || -z $CF_ADMIN_PASSWORD ]]; then
+if [[ -z $SYSTEM_DOMAIN || -z $pcf_admin_username || -z $pcf_admin_password ]]; then
   echo "ERROR: one of the following environment variables is not set: "
   echo ""
-  echo "                 CF_API_URL"
-  echo "                 CF_ADMIN_USERNAME"
-  echo "                 CF_ADMIN_PASSWORD"
+  echo "                 SYSTEM_DOMAIN"
+  echo "                 pcf_admin_username"
+  echo "                 pcf_admin_password"
   echo ""
   exit 1
 fi
