@@ -1,33 +1,35 @@
 #!/usr/bin/env bash
+set -e
 
 ### Load env
 
-set -e
+project_dir=$(readlink -f "$(dirname $0)/../..")
+source $project_dir/common/utils/load-cf-env.sh
+source $project_dir/common/utils/cf-helpers.sh
 
-source ./pcf-pipelines/functions/export_cf_credentials.sh
-source ./pcf-pipelines/functions/cf-helpers.sh
 cf_authenticate_and_target
 cf_target_org_and_space system chaos-loris
+cf_create_service p-mysql 10mb chaos-loris-db
 
-cf_create_service p-mysql 100mb chaos-loris-broker-db
 
-cd binary
+pushd binary
 cat > manifest.yml <<EOS
 ---
 applications:
-- name: chaos-loris-broker
-  memory: 512M
+- name: chaos-loris
+  memory: 1G
   instances: 2
-  buildpack: https://github.com/ryandotsmith/null-buildpack
-  path: .
-  command: ./cf-chaos-loris-broker -c plans.yml
+  path: chaos-loris.jar
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
   env:
-    CHAOS_LORIS_HOST: https://chaos-loris.$APPS_DOMAIN
+    LORIS_CLOUDFOUNDRY_HOST: $API_DOMAIN
+    LORIS_CLOUDFOUNDRY_PASSWORD: $pcf_admin_password
+    LORIS_CLOUDFOUNDRY_SKIPSSLVALIDATION: true
+    LORIS_CLOUDFOUNDRY_USERNAME: $pcf_admin_username
   services:
-  - chaos-loris-broker-db
+  - chaos-loris-db
 EOS
-
-echo "##############################"
 cf push
 exit_on_error "Error pushing app"
-echo "##############################"
+popd
+
