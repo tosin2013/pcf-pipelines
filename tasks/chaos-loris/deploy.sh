@@ -21,7 +21,7 @@ applications:
   path: chaos-loris.jar
   buildpack: https://github.com/cloudfoundry/java-buildpack.git
   env:
-    LORIS_CLOUDFOUNDRY_HOST: "https://api.${SYSTEM_DOMAIN}"
+    LORIS_CLOUDFOUNDRY_HOST: api.${SYSTEM_DOMAIN}
     LORIS_CLOUDFOUNDRY_PASSWORD: $pcf_admin_password
     LORIS_CLOUDFOUNDRY_SKIPSSLVALIDATION: true
     LORIS_CLOUDFOUNDRY_USERNAME: $pcf_admin_username
