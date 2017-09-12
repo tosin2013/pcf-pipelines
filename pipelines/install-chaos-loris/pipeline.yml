@@ -41,7 +41,8 @@ jobs:
   - aggregate:
     - get: service-broker-repo 
     - get: pcf-pipelines
-#      passed: [deploy-chaos-loris]
+      passed: [deploy-chaos-loris]
+      trigger: true
   - task: build
     file: pcf-pipelines/tasks/chaos-loris/build-service-broker.yml
   - task: deploy
@@ -57,7 +58,8 @@ jobs:
   plan:
   - aggregate:
     - get: pcf-pipelines
-#      passed: [deploy-service-broker]
+      passed: [deploy-service-broker]
+      trigger: true
   - task: register
     file: pcf-pipelines/tasks/chaos-loris/register-service-broker.yml
     params:
@@ -70,6 +72,8 @@ jobs:
   plan:
   - aggregate:
     - get: pcf-pipelines
+      passed: [register-service-broker]
+      trigger: true
     - get: simple-victim-app
   - task: run-app-test
     file: pcf-pipelines/tasks/chaos-loris/run-app-test.yml
