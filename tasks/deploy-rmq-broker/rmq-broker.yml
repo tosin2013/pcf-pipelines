@@ -1,0 +1,181 @@
+---
+name: rmq-broker
+releases:
+- name: cf-rabbitmq-multitenant-broker
+  version: 5.0.0
+- name: consul
+  version: '173'
+- name: routing
+  version: 0.152.0
+- name: syslog-migration
+  version: '8'
+stemcells:
+- alias: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+  os: ubuntu-trusty
+  version: '3421.20'
+instance_groups:
+- name: rabbitmq-broker
+  azs:
+  - AZ1
+  instances: 1
+  lifecycle: service
+  jobs:
+  - name: rabbitmq-broker
+    release: cf-rabbitmq-multitenant-broker
+  - name: route_registrar
+    release: routing
+    consumes:
+      nats:
+        from: nats
+        deployment: ((cf_deployment_name))
+    provides: {}
+  - name: consul_agent
+    release: consul
+    consumes:
+      consul_common:
+        from: consul_common_link
+        deployment: ((cf_deployment_name))
+      consul_client:
+        from: consul_client_link
+        deployment: ((cf_deployment_name))
+      consul_server: nil
+      consul: nil
+  - name: syslog_forwarder
+    release: syslog-migration
+  vm_type: small
+  stemcell: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+  properties:
+    rabbitmq-broker:
+      route: vmware-rabbitmq-broker
+      ip: ((broker_ip))
+      cc_endpoint: https://api.((system_domain))
+      rabbitmq:
+        operator_set_policy:
+          enabled: false
+          policy_name: operator_set_policy
+          policy_definition:
+          policy_priority: 50
+        management_domain: ((rmq_management_domain))
+        hosts:
+        - ((rmq_host))
+        dns_host:
+        administrator:
+          username: ((rmq_user))
+          password: ((rmq_password))
+        ssl:
+      service:
+        name: vmware-rabbitmq
+        uuid: e81c2e7d-cf23-44cd-9ef4-49525c92a543
+        plan_uuid: fb85cfff-eb57-4d94-bd94-bc4d62009b7e
+        url: ((broker_ip))
+        username: broker 
+        password: ((broker_password))
+      logging:
+        level: info
+        print_stack_traces: true
+    route_registrar:
+      routes:
+      - name: vmware-rabbitmq-broker
+        port: 4567
+        registration_interval: 20s
+        uris:
+        - vmware-rabbitmq-broker.((system_domain))
+    syslog:
+      forward_files: true
+      migration:
+        disabled: false
+        message_format: job_index_id
+      address: ((syslog_host))
+      port: ((syslog_port))
+      transport: tcp
+      custom_rule: |
+        module(load="imfile")
+
+        input(type="imfile"
+              File="/var/vcap/sys/log/rabbitmq-broker/startup_stdout.log"
+              Tag="rabbitmq_broker_startup_stdout")
+
+        input(type="imfile"
+              File="/var/vcap/sys/log/rabbitmq-broker/startup_stderr.log"
+              Tag="rabbitmq_broker_startup_stderr")
+
+        input(type="imfile"
+              File="/var/vcap/sys/log/route_registrar/route_registrar.log"
+              Tag="rabbitmq_broker_route_registrar_stdout")
+
+        input(type="imfile"
+              File="/var/vcap/sys/log/route_registrar/route_registrar.err.log"
+              Tag="rabbitmq_broker_route_registrar_stderr")
+  update:
+    max_in_flight: 1
+  networks:
+  - name: DYNAMIC-SERVICES
+    default:
+    - dns
+    - gateway
+    static_ips:
+    - ((broker_ip))
+- name: broker-registrar
+  azs:
+  - AZ1
+  instances: 1
+  lifecycle: errand
+  jobs:
+  - name: broker-registrar
+    release: cf-rabbitmq-multitenant-broker
+  vm_type: micro
+  stemcell: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+  properties:
+    broker:
+      name: vmware-rabbitmq
+      service:
+        name: vmware-rabbitmq
+      host: vmware-rabbitmq-broker.((system_domain))
+      username:  broker
+      password: ((broker_password))
+    cf:
+      api_url: https://api.((system_domain))
+      admin_username: ((pcf_admin_user))
+      admin_password:  ((pcf_admin_password))
+      skip_ssl_validation: true
+  networks:
+  - name: DYNAMIC-SERVICES
+    default:
+    - dns
+    - gateway
+- name: broker-deregistrar
+  azs:
+  - AZ1
+  instances: 1
+  lifecycle: errand
+  jobs:
+  - name: broker-deregistrar
+    release: cf-rabbitmq-multitenant-broker
+  vm_type: micro
+  stemcell: bosh-vsphere-esxi-ubuntu-trusty-go_agent
+  properties:
+    broker:
+      name: vmware-rabbitmq
+      service:
+        name: vmware-rabbitmq
+    cf:
+      api_url: https://api.((system_domain))
+      admin_username: ((pcf_admin_user))
+      admin_password:  ((pcf_admin_password))
+      skip_ssl_validation: true
+  networks:
+  - name: DYNAMIC-SERVICES
+    default:
+    - dns
+    - gateway
+update:
+  canaries: 1
+  canary_watch_time: 30000-300000
+  update_watch_time: 30000-300000
+  max_in_flight: 1
+  max_errors: 2
+  serial: false
+
+variables:
+- name: broker_password
+  type: password
