@@ -8,7 +8,7 @@ resources:
 
 
 jobs:
-- name: deploy-turbulence
+- name: deploy-rmq-broker
   plan:
   - get: pcf-pipelines
   - task: deploy-rmq-broker
