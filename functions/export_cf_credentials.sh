@@ -28,9 +28,9 @@ export uaa_admin_client_secret=$(om-linux \
   --password "${OPSMAN_PASSWORD}" \
   credentials  -p cf -c .uaa.admin_client_credentials -f password)
 
-export cf_product_guid=$(om-linux \		 +source ./pcf-pipelines/functions/export_cf_credentials.sh
-  --target "https://${OPSMAN_URL}" \
+export cf_product_guid=$(om-linux \		 
+  --target "https://${OPSMAN_DOMAIN_OR_IP_ADDRESS}" \
   --skip-ssl-validation \
   --username "${OPSMAN_USER}" \
   --password "${OPSMAN_PASSWORD}" \
-  curl -s -p /api/v0/deployed/products | jq -r '.[] | select(.type == "cf").guid'
+  curl -s -p /api/v0/deployed/products | jq -r '.[] | select(.type == "cf").guid')
