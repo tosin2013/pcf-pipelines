@@ -8,7 +8,7 @@ resources:
 - name: broker-repo
   type: git 
   source:
-    uri: https://github.com/spring-cloud-samples/cloudfoundry-service-broker
+    uri: https://github.com/s-matyukevich/cloudfoundry-service-broker
     branch: master
 
 jobs:
