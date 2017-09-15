@@ -6,4 +6,4 @@ pushd broker-repo
 ./gradlew -x test  
 popd
 
-mv broker-repo/target/cloudfoundry-mongodb-service-broker.jar binary
+mv broker-repo/build/lib/cloudfoundry-mongodb-service-broker.jar binary
