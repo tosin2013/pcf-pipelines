@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: allomov/chaos-loris-build
+    tag: v1.1
+
+run:
+  path: pcf-pipelines/tasks/chaos-loris/build.sh
+
+inputs:
+- name: pcf-pipelines 
+- name: chaos-loris-repo
+outputs:
+- name: binary

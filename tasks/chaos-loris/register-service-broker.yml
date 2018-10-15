@@ -1,0 +1,12 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: smatyukevich/docker-cfbosh}
+
+run:
+  path: pcf-pipelines/tasks/chaos-loris/register-service-broker.sh
+
+inputs:
+- name: pcf-pipelines 

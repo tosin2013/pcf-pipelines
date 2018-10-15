@@ -1,7 +1,8 @@
 .DS_Store
-config
 *.iml
 .idea
 *.sw[po]
 azure-prepare-env/params.yml
 azure-prepare-env/creds.yml
+*vars*.yml
+tmp-pipeline.yml

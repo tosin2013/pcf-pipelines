@@ -1,0 +1,72 @@
+{
+  ".properties.metrics_polling_interval": {
+    "value": 30
+  },
+  ".properties.syslog_selector": {
+    "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "disabled" : "enabled" %>"
+  },
+  <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
+  ".properties.syslog_selector.enabled.address": {
+    "value": "<%= ENV['SYSLOG_HOST']%>"
+  },
+  ".properties.syslog_selector.enabled.port": {
+    "value": "<%= ENV['SYSLOG_PORT']%>"
+  },
+  <% end %>
+  ".rabbitmq-server.server_admin_credentials": {
+    "value": {
+      "identity": "<%= ENV['RABBITMQ_ADMIN'] %>",
+      "password": "<%= ENV['RABBITMQ_PASSWORD'] %>"
+    }
+  },
+  ".rabbitmq-server.plugins": {
+    "value": [
+      "rabbitmq_management"
+    ]
+  },
+    ".properties.disk_alarm_threshold": {
+      "value": "mem_relative_1_0"
+    },
+  ".rabbitmq-server.ssl_verify": {
+    "value": false
+  },
+  ".rabbitmq-server.ssl_verification_depth": {
+    "value": 5
+  },
+  ".rabbitmq-server.ssl_fail_if_no_peer_cert": {
+    "value": false
+  },
+  ".rabbitmq-server.ports": {
+    "value": "15672, 5672, 5671, 1883, 8883, 61613, 61614, 15674"
+  },
+  ".on-demand-broker.enable_single_node_plan": {
+    "value": false
+  },
+  ".on-demand-broker.plan_name": {
+    "value": "solo"
+  },
+  ".on-demand-broker.plan_description": {
+    "value": "Single node RabbitMQ dedicated instance"
+  },
+  ".on-demand-broker.plan_features": {
+    "value": "RabbitMQ 3.6.9"
+  },
+  ".on-demand-broker.solo_plan_instance_quota": {
+    "value": 0
+  },
+  ".on-demand-broker.global_service_instance_quota": {
+    "value": 20
+  },
+  ".on-demand-broker.persistent_disk_type": {
+    "value": "51200",
+    "optional": false
+  },
+  ".on-demand-broker.az_placement": {
+    "value": <%= ENV['ARRAY_SERVICE_AZS'] %>,
+    "optional": false
+  },
+  ".on-demand-broker.rmq_vm_type": {
+    "value": "large.mem"
+  }
+}
+

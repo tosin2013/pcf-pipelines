@@ -1,0 +1,127 @@
+{
+    ".properties.syslog_selector": {
+      "value": "<%= ENV['SYSLOG_HOST'].to_s.empty? ? "No" : "Yes" %>"
+    },
+    <% if !ENV['SYSLOG_HOST'].to_s.empty? %>
+    ".properties.syslog_selector.active.syslog_address": {
+      "value": "<%= ENV['SYSLOG_HOST']%>"
+    },
+    ".properties.syslog_selector.active.syslog_port": {
+      "value": "<%= ENV['SYSLOG_PORT']%>"
+    },
+    ".properties.syslog_selector.active.syslog_transport": {
+      "value": "<%= ENV['SYSLOG_PROTOCOL']%>"
+    },
+    ".properties.syslog_selector.active.syslog_format": {
+      "value": "rfc5424"
+    },
+    <% end %>
+    ".properties.metrics_polling_interval": {
+      "value": 30
+    },
+    ".properties.small_plan_selector": {
+      "value": "Plan Active"
+    },
+    ".properties.small_plan_selector.active.name": {
+      "value": "cache-small"
+    },
+    ".properties.small_plan_selector.active.description": {
+      "value": "This plan provides a small dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled"
+    },
+    ".properties.small_plan_selector.active.cf_service_access": {
+      "value": "enable"
+    },
+    ".properties.small_plan_selector.active.az_single_select": {
+      "value": "AZ1"
+    },
+    ".properties.small_plan_selector.active.vm_type": {
+      "value": "medium"
+    },
+    ".properties.small_plan_selector.active.disk_size": {
+      "value": "10240"
+    },
+    ".properties.small_plan_selector.active.timeout": {
+      "value": 3600
+    },
+    ".properties.small_plan_selector.active.tcp_keepalive": {
+      "value": 60
+    },
+    ".properties.small_plan_selector.active.maxclients": {
+      "value": 1000
+    },
+    ".properties.small_plan_selector.active.lua_scripting": {
+      "value": true
+    },
+    ".properties.small_plan_selector.active.instance_limit": {
+      "value": 20
+    },
+    ".properties.medium_plan_selector": {
+      "value": "Plan Inactive"
+    },
+    ".properties.medium_plan_selector.active.name": {
+      "value": "cache-medium"
+    },
+    ".properties.medium_plan_selector.active.description": {
+      "value": "This plan provides a medium dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled"
+    },
+    ".properties.medium_plan_selector.active.cf_service_access": {
+      "value": "enable"
+    },
+    ".properties.medium_plan_selector.active.timeout": {
+      "value": 3600
+    },
+    ".properties.medium_plan_selector.active.tcp_keepalive": {
+      "value": 60
+    },
+    ".properties.medium_plan_selector.active.maxclients": {
+      "value": 5000
+    },
+    ".properties.medium_plan_selector.active.lua_scripting": {
+      "value": true
+    },
+    ".properties.medium_plan_selector.active.instance_limit": {
+      "value": 20
+    },
+    ".properties.large_plan_selector": {
+      "value": "Plan Inactive"
+    },
+    ".properties.large_plan_selector.active.name": {
+      "value": "cache-large"
+    },
+    ".properties.large_plan_selector.active.description": {
+      "value": "This plan provides a large dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled"
+    },
+    ".properties.large_plan_selector.active.cf_service_access": {
+      "value": "enable"
+    },
+    ".properties.large_plan_selector.active.timeout": {
+      "value": 3600
+    },
+    ".properties.large_plan_selector.active.tcp_keepalive": {
+      "value": 60
+    },
+    ".properties.large_plan_selector.active.maxclients": {
+      "value": 10000
+    },
+    ".properties.large_plan_selector.active.lua_scripting": {
+      "value": true
+    },
+    ".properties.large_plan_selector.active.instance_limit": {
+      "value": 20
+    },
+    ".properties.backups_selector": {
+      "value": "No Backups"
+    },
+    ".redis-on-demand-broker.service_instance_limit": {
+      "value": 20
+    },
+    ".redis-on-demand-broker.vm_extensions": {
+      "value": null
+    },
+    ".cf-redis-broker.service_instance_limit": {
+      "value": 5
+    },
+    ".cf-redis-broker.redis_maxmemory": {
+      "value": "512MB"
+    }
+}

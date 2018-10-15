@@ -1,0 +1,789 @@
+{
+  "properties": {
+    ".properties.syslog_selector": {
+      "type": "selector",
+      "configurable": true,
+      "credential": false,
+      "value": "No",
+      "optional": false
+    },
+    ".properties.syslog_selector.active.syslog_address": {
+      "type": "network_address",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.syslog_selector.active.syslog_port": {
+      "type": "port",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.syslog_selector.active.syslog_transport": {
+      "type": "dropdown_select",
+      "configurable": true,
+      "credential": false,
+      "value": "tcp",
+      "optional": false,
+      "options": [
+        {
+          "label": "TCP",
+          "value": "tcp"
+        },
+        {
+          "label": "UDP",
+          "value": "udp"
+        },
+        {
+          "label": "RELP",
+          "value": "relp"
+        }
+      ]
+    },
+    ".properties.syslog_selector.active.syslog_format": {
+      "type": "dropdown_select",
+      "configurable": true,
+      "credential": false,
+      "value": "rfc5424",
+      "optional": false,
+      "options": [
+        {
+          "label": "RFC 5424",
+          "value": "rfc5424"
+        },
+        {
+          "label": "Legacy Format",
+          "value": "job_index_id"
+        }
+      ]
+    },
+    ".properties.metrics_polling_interval": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 30,
+      "optional": false
+    },
+    ".properties.eval_enabled": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": "\"EVAL\"",
+      "optional": false
+    },
+    ".properties.evalsha_enabled": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": "\"EVALSHA\"",
+      "optional": false
+    },
+    ".properties.quotes_string": {
+      "type": "string",
+      "configurable": false,
+      "credential": false,
+      "value": "\"\"",
+      "optional": false
+    },
+    ".properties.small_plan_selector": {
+      "type": "selector",
+      "configurable": true,
+      "credential": false,
+      "value": "Plan Active",
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.name": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "cache-small",
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.description": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "This plan provides a small dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled",
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.cf_service_access": {
+      "type": "dropdown_select",
+      "configurable": true,
+      "credential": false,
+      "value": "enable",
+      "optional": false,
+      "options": [
+        {
+          "label": "Enabled for all orgs and spaces",
+          "value": "enable"
+        },
+        {
+          "label": "Disabled for all orgs and spaces",
+          "value": "disable"
+        },
+        {
+          "label": "Leave access unchanged",
+          "value": "manual"
+        }
+      ]
+    },
+    ".properties.small_plan_selector.active.az_single_select": {
+      "type": "service_network_az_single_select",
+      "configurable": true,
+      "credential": false,
+      "value": "AZ1",
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.vm_type": {
+      "type": "vm_type_dropdown",
+      "configurable": true,
+      "credential": false,
+      "value": "medium",
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.disk_size": {
+      "type": "disk_type_dropdown",
+      "configurable": true,
+      "credential": false,
+      "value": "10240",
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 3600,
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.tcp_keepalive": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 60,
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.maxclients": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 1000,
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.lua_scripting": {
+      "type": "boolean",
+      "configurable": true,
+      "credential": false,
+      "value": true,
+      "optional": false
+    },
+    ".properties.small_plan_selector.active.instance_limit": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 20,
+      "optional": false
+    },
+    ".properties.medium_plan_selector": {
+      "type": "selector",
+      "configurable": true,
+      "credential": false,
+      "value": "Plan Inactive",
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.name": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "cache-medium",
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.description": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "This plan provides a medium dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled",
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.cf_service_access": {
+      "type": "dropdown_select",
+      "configurable": true,
+      "credential": false,
+      "value": "enable",
+      "optional": false,
+      "options": [
+        {
+          "label": "Enabled for all orgs and spaces",
+          "value": "enable"
+        },
+        {
+          "label": "Disabled for all orgs and spaces",
+          "value": "disable"
+        },
+        {
+          "label": "Leave access unchanged",
+          "value": "manual"
+        }
+      ]
+    },
+    ".properties.medium_plan_selector.active.az_single_select": {
+      "type": "service_network_az_single_select",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.vm_type": {
+      "type": "vm_type_dropdown",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.disk_size": {
+      "type": "disk_type_dropdown",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 3600,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.tcp_keepalive": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 60,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.maxclients": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 5000,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.lua_scripting": {
+      "type": "boolean",
+      "configurable": true,
+      "credential": false,
+      "value": true,
+      "optional": false
+    },
+    ".properties.medium_plan_selector.active.instance_limit": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 20,
+      "optional": false
+    },
+    ".properties.large_plan_selector": {
+      "type": "selector",
+      "configurable": true,
+      "credential": false,
+      "value": "Plan Inactive",
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.name": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "cache-large",
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.description": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "This plan provides a large dedicated Redis instance, tailored for caching use-cases with persistence to disk enabled",
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.cf_service_access": {
+      "type": "dropdown_select",
+      "configurable": true,
+      "credential": false,
+      "value": "enable",
+      "optional": false,
+      "options": [
+        {
+          "label": "Enabled for all orgs and spaces",
+          "value": "enable"
+        },
+        {
+          "label": "Disabled for all orgs and spaces",
+          "value": "disable"
+        },
+        {
+          "label": "Leave access unchanged",
+          "value": "manual"
+        }
+      ]
+    },
+    ".properties.large_plan_selector.active.az_single_select": {
+      "type": "service_network_az_single_select",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.vm_type": {
+      "type": "vm_type_dropdown",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.disk_size": {
+      "type": "disk_type_dropdown",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 3600,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.tcp_keepalive": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 60,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.maxclients": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 10000,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.lua_scripting": {
+      "type": "boolean",
+      "configurable": true,
+      "credential": false,
+      "value": true,
+      "optional": false
+    },
+    ".properties.large_plan_selector.active.instance_limit": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 20,
+      "optional": false
+    },
+    ".properties.backups_selector": {
+      "type": "selector",
+      "configurable": true,
+      "credential": false,
+      "value": "No Backups",
+      "optional": false
+    },
+    ".properties.backups_selector.s3.access_key_id": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.s3.secret_access_key": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.s3.endpoint_url": {
+      "type": "http_url",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".properties.backups_selector.s3.region": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".properties.backups_selector.s3.signature_version": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "4",
+      "optional": true
+    },
+    ".properties.backups_selector.s3.bucket_name": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.s3.path": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.s3.cron_schedule": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "0 0 * * *",
+      "optional": false
+    },
+    ".properties.backups_selector.s3.bg_save_timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 10,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.server": {
+      "type": "network_address",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.user": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.key": {
+      "type": "text",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.path": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.port": {
+      "type": "port",
+      "configurable": true,
+      "credential": false,
+      "value": 22,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.cron_schedule": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "0 0 * * *",
+      "optional": false
+    },
+    ".properties.backups_selector.scp.bg_save_timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 10,
+      "optional": false
+    },
+    ".properties.backups_selector.scp.fingerprint": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".properties.backups_selector.azure.account": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.azure.storage_access_key": {
+      "type": "text",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.azure.path": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.azure.cron_schedule": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "0 0 * * *",
+      "optional": false
+    },
+    ".properties.backups_selector.azure.bg_save_timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 10,
+      "optional": false
+    },
+    ".properties.backups_selector.azure.container": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.azure.blob_store_base_url": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".properties.backups_selector.gcs.project_id": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.gcs.bucket_name": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.gcs.service_account_json": {
+      "type": "text",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": false
+    },
+    ".properties.backups_selector.gcs.cron_schedule": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "0 0 * * *",
+      "optional": false
+    },
+    ".properties.backups_selector.gcs.bg_save_timeout": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 10,
+      "optional": false
+    },
+    ".properties.metron_tls_cert": {
+      "type": "rsa_cert_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "private_key_pem": "***"
+      },
+      "optional": false
+    },
+    ".redis-on-demand-broker.service_instance_limit": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 20,
+      "optional": false
+    },
+    ".redis-on-demand-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".redis-on-demand-broker.broker_http_auth_credentials": {
+      "type": "simple_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "admin",
+        "password": "***"
+      },
+      "optional": false
+    },
+    ".redis-on-demand-broker.vm_extensions": {
+      "type": "multi_select_options",
+      "configurable": true,
+      "credential": false,
+      "value": null,
+      "optional": true
+    },
+    ".register-on-demand-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".upgrade-all-service-instances.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".delete-all-service-instances-and-deregister-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".on-demand-broker-smoke-tests.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".cf-redis-broker.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".cf-redis-broker.service_instance_limit": {
+      "type": "integer",
+      "configurable": true,
+      "credential": false,
+      "value": 5,
+      "optional": false
+    },
+    ".cf-redis-broker.redis_maxmemory": {
+      "type": "string",
+      "configurable": true,
+      "credential": false,
+      "value": "512MB",
+      "optional": false
+    },
+    ".cf-redis-broker.broker_http_auth_credentials": {
+      "type": "simple_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "admin",
+        "password": "***"
+      },
+      "optional": false
+    },
+    ".cf-redis-broker.redis_config_command": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    },
+    ".cf-redis-broker.redis_save_command": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    },
+    ".cf-redis-broker.redis_bg_save_command": {
+      "type": "secret",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "secret": "***"
+      },
+      "optional": false
+    },
+    ".dedicated-node.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".broker-registrar.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".broker-deregistrar.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    },
+    ".smoke-tests.vm_credentials": {
+      "type": "salted_credentials",
+      "configurable": false,
+      "credential": true,
+      "value": {
+        "identity": "vcap",
+        "password": "***",
+        "salt": "***"
+      },
+      "optional": false
+    }
+  }
+}

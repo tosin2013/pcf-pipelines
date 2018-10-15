@@ -1,0 +1,1 @@
+om -k -t https://<ops-man-uri> -u <user> -p <pass> curl --path /api/v0/staged/products/<product-name-with-unique-id>/properties

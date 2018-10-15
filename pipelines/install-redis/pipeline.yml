@@ -1,0 +1,87 @@
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
+
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+
+- name: pivnet-product 
+  type: pivnet
+  source:
+    api_token: ((pivnet_token))
+    product_slug: p-redis 
+    product_version: ((p_redis_version))
+    sort_by: semver
+
+jobs:
+- name: upload-tile
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+    - get: pivnet-product
+      trigger: true
+      params:
+        globs:
+        - "*pivotal"
+
+  - task: upload-tile-and-stemcell
+    file: pcf-pipelines/tasks/upload-product-and-stemcell/task.yml
+    params:
+      IAAS: ((iaas_type))
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPS_MGR_USR: ((opsman_admin_username))
+      OPS_MGR_PWD: ((opsman_admin_password))
+      PIVNET_API_TOKEN: ((pivnet_token))
+      NO_PROXY: ""
+      OM_IP: ""
+
+  - task: stage-tile
+    file: pcf-pipelines/tasks/stage-product/task.yml
+    params:
+      OPSMAN_USERNAME: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      PRODUCT_NAME: p-redis 
+
+- name: config-tile
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+      trigger: true
+      passed: [upload-tile]
+
+  - task: config-tile
+    file: pcf-pipelines/tasks/config-tile/task.yml
+    params:
+      PRODUCT_NAME: p-redis
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SERVICES_NETWORK_NAME: ((services_network_name))
+      DYNAMIC_SERVICES_NETWORK_NAME: ((dynamic_services_network_name))
+      SERVICES_NW_AZS: ((services_nw_azs))
+      SYSLOG_HOST: ((syslog_host))
+      SYSLOG_PORT: ((syslog_port))
+      SYSLOG_PROTOCOL: ((syslog_protocol))
+
+- name: product-apply-changes
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+      trigger: true
+      passed: [config-tile]
+
+  - task: apply-changes
+    file: pcf-pipelines/tasks/apply-changes/task.yml
+    params:
+      OPSMAN_USERNAME: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))

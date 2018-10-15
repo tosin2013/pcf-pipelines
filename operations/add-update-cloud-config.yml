@@ -1,0 +1,19 @@
+- op: add
+  path: /jobs/-
+  value:
+    name: update-cloud-config
+    plan:
+    - aggregate:
+      - get: pcf-pipelines
+      - get: pcf-ops-manager
+        params: {globs: []}
+        passed: [deploy-ert]
+        trigger: true
+
+    - task:  update-cloud-config
+      file: pcf-pipelines/tasks/update-cloud-config/task.yml
+      params:
+        OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+        OPSMAN_USER: ((opsman_admin_username))
+        OPSMAN_PASSWORD: ((opsman_admin_password))
+        DYNAMIC_SERVICES_NETWORK_STATIC_IPS: ((dynamic_services_network_static_ips))

@@ -1,0 +1,24 @@
+---
+applications:
+- name: firehose-to-loginsight
+  health-check-type: none
+  no-route: true
+  instances: 3 
+  buildpack: binary_buildpack
+  command: ./firehose-to-loginsight
+env:
+  API_ENDPOINT: https://api.<%= ENV['SYSTEM_DOMAIN'] %>
+  DOPPLER_ENDPOINT: wss://doppler.<%= ENV['SYSTEM_DOMAIN'] %>:443
+  INSIGHT_SERVER: <%= ENV['LOGINSIGHT_URL'] %>
+  INSIGHT_SERVER_PORT: 9543
+  INSIGHT_BATCH_SIZE: 5
+  LOG_EVENT_TOTALS: true
+  LOG_EVENT_TOTALS_TIME: 10s
+  SKIP_SSL_VALIDATION: true
+  FIREHOSE_SUBSCRIPTION_ID: photon-syslog-nozzle-dev-scdc
+  FIREHOSE_USER: <%= ENV['pcf_admin_username'] %>
+  FIREHOSE_PASSWORD: <%= ENV['pcf_admin_password'] %>
+  FIREHOSE_CLIENT_ID: firehose-to-loginsight
+  FIREHOSE_CLIENT_SECRET: <%= ENV['FIREHOSE_TO_LOGINISGHT_CLIENT_SECRET'] %>
+  CONCURRENT_WORKERS: 200
+

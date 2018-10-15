@@ -1,0 +1,5 @@
+rmq_broker_ip:
+external_rmq_host:
+external_rmq_management_domain:
+external_rmq_user:
+external_rmq_password:

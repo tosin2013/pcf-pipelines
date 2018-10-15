@@ -1,0 +1,11 @@
+---
+- op: replace
+  path: /resources/name=pcf-pipelines
+  value:
+    name: pcf-pipelines
+    type: git
+    source:
+      uri: {{git_repo}} 
+      branch: {{git_branch}}
+      skip_ssl_verification: true
+

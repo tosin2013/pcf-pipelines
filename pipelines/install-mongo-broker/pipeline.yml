@@ -1,0 +1,51 @@
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+- name: broker-repo
+  type: git 
+  source:
+    uri: https://github.com/s-matyukevich/cloudfoundry-service-broker
+    branch: master
+
+jobs:
+- name: deploy-mongo-broker
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+    - get: broker-repo
+  - task: build
+    file: pcf-pipelines/tasks/mongo-broker/build.yml
+    params:
+  - task: deploy
+    file: pcf-pipelines/tasks/mongo-broker/deploy.yml
+    params: 
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      APPS_DOMAIN: ((apps_domain))
+      MONGO_HOST: ((mongo_host))
+      MONGO_PORT: ((mongo_port))
+      MONGO_USER: ((mongo_user))
+      MONGO_PASSWORD: ((mongo_password))
+      MONGO_BROKER_PASSWORD: ((mongo_broker_password))
+
+- name: register-service-broker
+  plan:
+  - aggregate:
+    - get: pcf-pipelines
+      passed: [deploy-mongo-broker]
+      trigger: true
+  - task: register
+    file: pcf-pipelines/tasks/mongo-broker/register-service-broker.yml
+    params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      APPS_DOMAIN: ((apps_domain))
+      MONGO_BROKER_PASSWORD: ((mongo_broker_password))

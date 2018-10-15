@@ -1,0 +1,28 @@
+resources:
+- name: pcf-pipelines
+  type: git
+  source:
+    uri: ((git_repo)) 
+    branch: ((git_branch))
+    skip_ssl_verification: true
+
+
+jobs:
+- name: deploy-rmq-broker
+  plan:
+  - get: pcf-pipelines
+  - task: deploy-rmq-broker
+    file: pcf-pipelines/tasks/deploy-rmq-broker/task.yml
+    params:
+      OPSMAN_DOMAIN_OR_IP_ADDRESS: ((opsman_domain_or_ip_address))
+      OPSMAN_USER: ((opsman_admin_username))
+      OPSMAN_PASSWORD: ((opsman_admin_password))
+      SYSTEM_DOMAIN: ((system_domain))
+      SYSLOG_HOST: ((syslog_host))
+      SYSLOG_PORT: ((syslog_port))
+      RMQ_BROKER_IP: ((rmq_broker_ip))
+      RMQ_HOST: ((external_rmq_host))
+      RMQ_MANAGEMENT_DOMAIN: ((external_rmq_management_domain))
+      RMQ_USER: ((external_rmq_user))
+      RMQ_PASSWORD: ((external_rmq_password))
+
