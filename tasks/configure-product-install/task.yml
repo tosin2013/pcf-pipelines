@@ -19,4 +19,4 @@ inputs:
   - name: pcf-pipelines
 
 run:
-  path: pcf-pipelines/tasks/configure-product/task.sh
+  path: pcf-pipelines/tasks/configure-product-install/task.sh
