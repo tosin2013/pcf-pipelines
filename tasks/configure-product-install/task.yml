@@ -16,9 +16,7 @@ params:
   NETWORK_PROPERTIES:
 
 inputs:
-  - name: pipelines-repo
-  - name: om-cli
-  - name: jq
+  - name: pcf-pipelines
 
 run:
-  path: pipelines-repo/tasks/config-product/task.sh
+  path: pcf-pipelines/tasks/config-product/task.sh
