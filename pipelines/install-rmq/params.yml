@@ -1,4 +1,304 @@
-rabbitmq_admin:
-rabbitmq_password:
-p_rabbitmq_version:
+rabbitmq_admin:  CHANGEME
+rabbitmq_password: CHANGEME
+p_rabbitmq_version: CHANGEME
+iaas_type: CHANGEME
+
+opsman_client_id:
+opsman_client_secret:
+opsman_domain_or_ip_address: CHANGEME
+# Operations Manager credentials to set
+# opsman_admin_username/opsman_admin_password needs to be specified
+opsman_admin_username: CHANGEME
+opsman_admin_password: CHANGEME
+# Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
+pivnet_token: CHANGEME
+git_private_key: |
+  CHANGEME
+singleton_jobs_az: CHANGEME # [R] Place singleton jobs in an AZ
+other_azs: CHANGEME # [R] Balance other jobs in AZ's
+network_name: CHANGEME # [R] Tile network name
+service_network_name: CHANGEME
+
+product-properties: |
+  ---
+  ".properties.disk_alarm_threshold":
+    value: fixed_50_mb                                                          # fixed_50_mb|mem_relative_1_0|mem_relative_1_5|mem_relative_2_0
+  ".properties.global_settings_secure_bindings":
+    value: 'No'
+  ".properties.global_settings_shareable_instances":
+    value: 'No'
+  ".properties.metrics_polling_interval":
+    value: 30
+  ".properties.syslog_selector":
+    value: disabled
+  ".properties.syslog_selector.enabled.address":
+    value:
+  ".properties.syslog_selector.enabled.port":
+    value:
+  ".properties.syslog_selector.enabled.syslog_transport":
+    value:                                                                      # tcp|udp
+  ".properties.syslog_selector.enabled.syslog_format":
+    value:                                                                      # rfc5424
+  ".properties.syslog_selector.enabled.syslog_tls":
+    value:                                                                      # false
+  ".properties.syslog_selector.enabled.syslog_permitted_peer":
+    value:
+  ".properties.syslog_selector.enabled.syslog_ca_cert":
+    value:
+  ".properties.on_demand_broker_plan_1_cf_service_access":
+    value: disable
+  ".properties.on_demand_broker_plan_1_name":
+    value: single-node-3.7
+  ".properties.on_demand_broker_plan_1_description":
+    value: This plan provides a single dedicated RabbitMQ node
+  ".properties.on_demand_broker_plan_1_instance_quota":
+    value: 10
+  ".properties.on_demand_broker_plan_1_features":
+    value: RabbitMQ 3.7
+  ".properties.on_demand_broker_plan_1_rabbitmq_az_placement":
+    value: ["CHANGEME", "CHANGEME"]
+  ".properties.on_demand_broker_plan_1_rabbitmq_vm_type":
+    value: medium.disk
+  ".properties.on_demand_broker_plan_1_rabbitmq_persistent_disk_type":
+    value: '10240'
+  ".properties.on_demand_broker_plan_1_rabbitmq_number_of_nodes":
+    value: 1
+  ".properties.on_demand_broker_plan_1_rabbitmq_cluster_partition_handling_strategy":
+    value: pause_minority                                                       # pause_minority|autoheal
+  ".properties.on_demand_broker_plan_1_disk_limit_acknowledgement":
+    value:
+    - acknowledge
+  ".properties.on_demand_broker_plan_2_selector":
+    value: disabled
+  ".properties.on_demand_broker_plan_2_selector.enabled.cf_service_access":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.name":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.description":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.features":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.instance_quota":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.rabbitmq_persistent_disk_type":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.rabbitmq_number_of_nodes":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.rabbitmq_cluster_partition_handling_strategy":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.rabbitmq_az_placement":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.rabbitmq_vm_type":
+    value:
+  ".properties.on_demand_broker_plan_2_selector.enabled.disk_limit_acknowledgement":
+    value:
+  ".properties.on_demand_broker_plan_3_selector":
+    value: disabled
+  ".properties.on_demand_broker_plan_3_selector.enabled.cf_service_access":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.name":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.description":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.features":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.instance_quota":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.rabbitmq_persistent_disk_type":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.rabbitmq_number_of_nodes":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.rabbitmq_cluster_partition_handling_strategy":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.rabbitmq_az_placement":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.rabbitmq_vm_type":
+    value:
+  ".properties.on_demand_broker_plan_3_selector.enabled.disk_limit_acknowledgement":
+    value:
+  ".properties.on_demand_broker_plan_4_selector":
+    value: disabled
+  ".properties.on_demand_broker_plan_4_selector.enabled.cf_service_access":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.name":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.description":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.features":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.instance_quota":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.rabbitmq_persistent_disk_type":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.rabbitmq_number_of_nodes":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.rabbitmq_cluster_partition_handling_strategy":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.rabbitmq_az_placement":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.rabbitmq_vm_type":
+    value:
+  ".properties.on_demand_broker_plan_4_selector.enabled.disk_limit_acknowledgement":
+    value:
+  ".properties.on_demand_broker_plan_5_selector":
+    value: disabled
+  ".properties.on_demand_broker_plan_5_selector.enabled.cf_service_access":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.name":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.description":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.features":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.instance_quota":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.rabbitmq_persistent_disk_type":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.rabbitmq_number_of_nodes":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.rabbitmq_cluster_partition_handling_strategy":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.rabbitmq_az_placement":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.rabbitmq_vm_type":
+    value:
+  ".properties.on_demand_broker_plan_5_selector.enabled.disk_limit_acknowledgement":
+    value:
+   ## CHANGE ME
+  ".properties.on_demand_broker_plan_6_cf_service_access":
+    value: enable
+  ".properties.on_demand_broker_plan_6_name":
+    value: single-node-3.7
+  ".properties.on_demand_broker_plan_6_description":
+    value: This plan provides a single dedicated RabbitMQ node
+  ".properties.on_demand_broker_plan_6_instance_quota":
+    value: 10
+  ".properties.on_demand_broker_plan_6_features":
+    value: RabbitMQ 3.7
+  ".properties.on_demand_broker_plan_6_rabbitmq_az_placement":
+    value: ["us-east1-b", "us-east1-c","us-east1-d"]
+  ".properties.on_demand_broker_plan_6_rabbitmq_vm_type":
+    value: medium.disk
+  ".properties.on_demand_broker_plan_6_rabbitmq_persistent_disk_type":
+    value: '10240'
+  ".properties.on_demand_broker_plan_6_rabbitmq_number_of_nodes":
+    value: 1
+  ".properties.on_demand_broker_plan_6_rabbitmq_cluster_partition_handling_strategy":
+    value: pause_minority                                                       # pause_minority|autoheal
+  ".properties.on_demand_broker_plan_6_disk_limit_acknowledgement":
+    value:
+    - acknowledge
+  ".properties.on_demand_broker_vm_extensions":
+    value: []                                                                      # "public_ip"|""
+  ".rabbitmq-broker.dns_host":
+    value:
+  ".rabbitmq-broker.operator_set_policy_enabled":
+    value: false
+  ".rabbitmq-broker.policy_definition":
+    value:
+  ".rabbitmq-broker.static_ips":
+    value:
+  ".rabbitmq-haproxy.static_ips":
+    value:
+  ".rabbitmq-server.server_admin_credentials":
+    value:
+      identity: CHANGEME
+      password: CHANGEME
+  ".rabbitmq-server.plugins":
+    value:
+    #- rabbitmq_amqp1_0
+    #- rabbitmq_auth_backend_ldap
+    #- rabbitmq_auth_mechanism_ssl
+    #- rabbitmq_consistent_hash_exchange
+    - rabbitmq_federation
+    - rabbitmq_federation_management
+    - rabbitmq_management
+    - rabbitmq_management_visualiser
+    - rabbitmq_mqtt
+    - rabbitmq_shovel
+    - rabbitmq_shovel_management
+    - rabbitmq_stomp
+    #- rabbitmq_tracing
+    #- rabbitmq_web_stomp
+    #- rabbitmq_web_stomp_examples
+    #- rabbitmq_event_exchange
+    #- rabbitmq_jms_topic_exchange
+  ".rabbitmq-server.rsa_certificate":
+    value:
+      cert_pem:
+      private_key_pem:
+  ".rabbitmq-server.ssl_cacert":
+    value:
+  ".rabbitmq-server.ssl_verify":
+    value: false
+  ".rabbitmq-server.ssl_verification_depth":
+    value: 5
+  ".rabbitmq-server.ssl_fail_if_no_peer_cert":
+    value: false
+  ".rabbitmq-server.cookie":
+    value:
+  ".rabbitmq-server.config":
+    value:
+  ".rabbitmq-server.ssl_versions":
+    value:
+    - tlsv1.1
+    - tlsv1.2
+  ".rabbitmq-server.cluster_partition_handling":
+    value: pause_minority
+  ".rabbitmq-server.ports":
+    value: 15672, 5672, 5671, 1883, 8883, 61613, 61614, 15674
+  ".rabbitmq-server.static_ips":
+    value:
+  ".on-demand-broker.global_service_instance_quota":
+    value: 20
+  ".on-demand-broker.static_ips":
+    value:
+
+network-properties: |
+  network:
+    name: CHANGEME
+  service_network:
+    name: CHANGEME
+  other_availability_zones:
+    - name: CHANGEME
+    - name: CHANGEME
+  singleton_availability_zone:
+    name: CHANGEME
+
+resource-config: |
+  ---
+  rabbitmq-broker:
+    instances: 1
+    instance_type:
+      id: small
+  rabbitmq-haproxy:
+    instances: 1
+    instance_type:
+      id: small
+  rabbitmq-server:
+    instances: 3
+    instance_type:
+      id: large
+    persistent_disk:
+      size_mb: "30720"
+  on-demand-broker:
+    instances: 1
+    instance_type:
+      id: micro
+    persistent_disk:
+      size_mb: "1024"
+
+errands_to_disable: # "broker-registrar,smoke-tests,register-on-demand-broker,on-demand-broker-smoke-tests,upgrade-all-service-instances,broker-deregistrar,delete-all-service-instances-and-deregister-broker"
+
+apply_changes_config: |
+  deploy_products: ["p-rabbitmq"]
+  errands:
+    p-rabbitmq:
+      run_post_deploy:
+        broker-registrar: true
+        smoke-tests: true
+        register-broker: true
+        on-demand-broker-smoke-tests: true
+        upgrade-all-service-instances: true
+  ignore_warnings: true
 
