@@ -51,7 +51,7 @@ jobs:
       OPSMAN_USERNAME: {{opsman_admin_username}}
       OPSMAN_PASSWORD: {{opsman_admin_password}}
       OPSMAN_DOMAIN_OR_IP_ADDRESS: {{opsman_domain_or_ip_address}}
-      PRODUCT_NAME: p-mysql
+      PRODUCT_NAME: {{product-name}}
 
 - name: configure-product-install
   plan:
@@ -63,7 +63,7 @@ jobs:
   - task: configure-product
     file: pcf-pipelines/tasks/configure-product-install/task.yml
     params:
-      PRODUCT_NAME: p-mysql
+      PRODUCT_NAME: {{product-name}}
       OPSMAN_DOMAIN_OR_IP_ADDRESS: {{opsman_domain_or_ip_address}}
       OPSMAN_USER: {{opsman_admin_username}}
       OPSMAN_PASSWORD: {{opsman_admin_password}}
