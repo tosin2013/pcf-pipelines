@@ -6,12 +6,14 @@ else
   set -e
 fi
 
-curl -OL -o om-cli/om-linux https://github.com/pivotal-cf/om/releases/download/0.42.0/om-linux
+mkdir -p om-cli
+curl -OL https://github.com/pivotal-cf/om/releases/download/0.42.0/om-linux && mv om-linux om-cli/om-linux
 chmod +x om-cli/om-linux
 OM_CMD=./om-cli/om-linux
 
 
-curl -OL -o ./jq/jq-linux64 https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64
+mkdir -p jq
+curl -OL https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 jq/jq-linux64
 chmod +x ./jq/jq-linux64
 JQ_CMD=./jq/jq-linux64
 
