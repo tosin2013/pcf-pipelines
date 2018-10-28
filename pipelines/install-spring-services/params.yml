@@ -1,1 +1,60 @@
-p_spring_cloud_services_version:
+product_slug: p-spring-cloud-services # Product slug from pivnet
+product-name: p-spring-cloud-services # Product identifier from OpsManager using om cli
+p_spring_cloud_services_version: ^1\.5\..*$
+
+opsman_client_id:
+opsman_client_secret:
+opsman_domain_or_ip_address: CHANGEME
+# Operations Manager credentials to set
+# opsman_admin_username/opsman_admin_password needs to be specified
+opsman_admin_username: CHANGEME
+opsman_admin_password: CHANGEME
+# Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
+pivnet_token: CHANGEME
+git_private_key: |
+  CHANGEME
+
+dependency_product_tiles: 'cf,p-rabbitmq,pivotal-mysql'
+
+product-properties: |
+  ---
+  ".deploy-service-broker.persistence_store_service":
+    value: p.mysql
+  ".deploy-service-broker.persistence_store_service_plan":
+    value: db-small
+  ".deploy-service-broker.message_bus_service":
+    value: p-rabbitmq
+  ".deploy-service-broker.message_bus_service_plan":
+    value: standard
+  ".deploy-service-broker.broker_max_instances":
+    value: 100
+  ".deploy-service-broker.buildpack":
+    value:
+  ".deploy-service-broker.disable_cert_check":
+    value: false
+  ".deploy-service-broker.instances_app_push_timeout":
+    value:
+  ".deploy-service-broker.secure_credentials":
+    value: false
+  ".register-service-broker.enable_global_access":
+    value: true
+resource-config: |
+  deploy-service-broker:
+    instances: 1
+    instance_type:
+      id: "nano"
+  register-service-broker:
+    instances: 1
+    instance_type:
+      id: "nano"
+network-properties: |
+  network:
+    name:
+  other_availability_zones:
+    - name:
+    - name:
+  singleton_availability_zone:
+    name:
+errands_to_disable:
+
+apply_changes_config:
